@@ -1,0 +1,21 @@
+
+  .MuiGrid-container{
+    line-height: 0;
+    overflow: hidden;
+  
+  }
+ 
+  .select{
+    height:30px !important;
+    overflow:scroll !important;
+}
+.logo_signup {
+  border-radius: 50%;
+  max-width: 30%;
+  height: auto;
+  }
+  .MuiButton-label{
+
+    color: rgb(231, 231, 231);
+  }
+

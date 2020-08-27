@@ -1,0 +1,202 @@
+.header{
+    background-image: url('https://s3.amazonaws.com/thinkific-import/5433/cZ7kmdj9Rhy5cipqru5g_%21%20Homepage%20Banner.jpg');
+    height: 500px; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the*/
+    width:100
+     }
+   
+      .nav-link{
+          font-size: 18px;
+          font-weight: 400;
+      }
+.intro{
+    background: url(https://www.braintraining4dogs.com/get-btfd/assets/testibg.jpg) no-repeat center bottom;
+    background-color: #fff;   
+    padding-right:90px ;
+}
+
+img.card-img-top{
+    border-radius: 50%;
+    position: relative;
+    width: 40%;
+    top:-90px;
+}
+
+
+
+
+.intro h1{
+    padding-top: 50px;
+text-align: center;
+    color:#013a61;
+    font-size:36px
+}
+
+.intro h1 span{
+    color:#00add8;
+    font-size:36px;
+    font-weight: 800;
+
+}
+.intro .MuiPaper-root{
+    margin-top: 60px;
+    background-color: #00add8;
+    overflow: visible;
+    color: white;
+    text-align: center;
+    padding: 20px;
+height:500px
+
+}
+.intro .MuiTypography-colorTextSecondary{
+    color:white;
+    font-size:20px;
+    line-height: 1;
+
+}
+.intro .MuiTypography-body2{
+    padding-top: 22px;
+    font-size: 16px;
+    font-weight: 100;
+    text-align: justify;
+}
+.intro .MuiCardContent-root {
+    margin-top: -90px;
+
+
+}
+      img.logoNav{
+        max-height: none;
+        width: 12rem;
+        height: auto;
+      }
+
+      .instruction{
+          /*background-image: url(https://www.braintraining4dogs.com/get-btfd/assets/headerbg.jpg);*/
+          padding: 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          line-height: 8em;
+          background-color: #778899;
+      }
+      .instruction h2{
+        color: #ffffff;
+        text-align: center;
+        font-weight: 100;
+        font-size: 40px;
+ 
+      }
+      .instruction .MuiPaper-root{
+          display: flex;
+          align-items: center;
+          font-size: 22px;
+          font-weight: 300;
+          height: 85px;
+          width: 900px;
+          margin-left: 5px;
+      }
+
+      .premiuim_dresseur{
+          background-image:linear-gradient(0deg, rgb(238, 235, 231) 0%, rgb(237, 251, 255) 100%) !important;
+          padding:70px 20px;
+      }
+      .premiuim_dresseur  .textPremiuimDresseurs h3{
+          color:#013a61;
+          padding: 0 20px;
+          font-weight: bold;
+text-align: center;          
+      }
+
+      
+           
+      .textPremiuimDresseurs h4{
+   
+        margin-left: 10px;
+        text-align: justify;
+
+        
+    }
+    .MuiAlert-root.orange{
+        background-color: #cc5500 !important;
+    }
+    
+    .problems h4 {
+        margin-top: 30px;
+        color: #778899;;
+        text-align: center;
+        font-weight: 100;
+        font-size: 35px;
+
+
+    }
+
+    
+
+    .problems h5 {
+       
+        text-align: center;
+        font-weight: 100;
+        font-size: 24px;
+        color: rgba(2, 2, 2, 0.808);
+
+
+    }
+    .problems img{
+        margin-left: 180px;
+        height: 87%;
+    }
+    .problems li{
+            background: url(./images/icons8-cat-footprint-64.png) no-repeat;
+            padding-left: 30px;
+            padding-bottom: 20px;
+            list-style-type: none;
+
+        
+    }
+    .problems ul{
+        width:80%;
+        margin-top: 45px;
+        line-height: 10px;
+
+    }
+
+    .problems p{
+        text-align: justify;
+        line-height: 1.2em;
+        font-size: 18px;
+        font-style: italic;
+        color: black;
+
+    }
+    .premiuim_dresseur .MuiPaper-root {
+background-color: #edfafe;
+
+    }
+    .makeStyles-root-68 {
+        min-width: 100% !important ;
+        background-color: #fff0 !important;
+        padding-left: 15px !important;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+height: 350px;
+}
+.premiuim_dresseur .MuiTypography-colorTextSecondary {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+}
+.MuiTypography-displayBlock {
+    font-size: 20px;
+    color:black;
+    padding-left: 5px;
+}
+.premiuim_dresseur .MuiTypography-colorTextPrimary {
+    font-size:20px;
+
+}
+.premiuim_dresseur .MuiRating-sizeLarge {
+padding-left: 220px;
+}
