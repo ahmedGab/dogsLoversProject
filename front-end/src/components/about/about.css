@@ -14,15 +14,8 @@
 .intro{
     background: url(https://www.braintraining4dogs.com/get-btfd/assets/testibg.jpg) no-repeat center bottom;
     background-color: #fff;   
-    padding-right:90px ;
 }
 
-img.card-img-top{
-    border-radius: 50%;
-    position: relative;
-    width: 40%;
-    top:-90px;
-}
 
 
 
@@ -31,12 +24,12 @@ img.card-img-top{
     padding-top: 50px;
 text-align: center;
     color:#013a61;
-    font-size:36px
+    font-size:4
 }
 
 .intro h1 span{
     color:#00add8;
-    font-size:36px;
+    font-size:4;
     font-weight: 800;
 
 }
@@ -46,10 +39,11 @@ text-align: center;
     overflow: visible;
     color: white;
     text-align: center;
-    padding: 20px;
-height:500px
+    padding: 17px 10px;
+height:auto
 
 }
+
 .intro .MuiTypography-colorTextSecondary{
     color:white;
     font-size:20px;
@@ -58,9 +52,11 @@ height:500px
 }
 .intro .MuiTypography-body2{
     padding-top: 22px;
-    font-size: 16px;
+    font-size: 1.25;
     font-weight: 100;
     text-align: justify;
+    text-justify: inter-word;
+
 }
 .intro .MuiCardContent-root {
     margin-top: -90px;
@@ -69,7 +65,7 @@ height:500px
 }
       img.logoNav{
         max-height: none;
-        width: 12rem;
+        max-width: 160px;
         height: auto;
       }
 
@@ -85,24 +81,33 @@ height:500px
       .instruction h2{
         color: #ffffff;
         text-align: center;
-        font-weight: 100;
-        font-size: 40px;
+        font-weight: 400;
+        font-size: 3.1;
  
       }
       .instruction .MuiPaper-root{
           display: flex;
           align-items: center;
-          font-size: 22px;
-          font-weight: 300;
-          height: 85px;
-          width: 900px;
+          font-size: 20px;
+          font-weight: 400;
+          height: 100px;
+          width: 66vw;
           margin-left: 5px;
       }
 
-      .premiuim_dresseur{
+  
+
+
+      .instruction img{
+        max-width: 75px;
+        max-height: 95px;
+        margin-bottom:25px ;
+    }
+.premiuim_dresseur{
           background-image:linear-gradient(0deg, rgb(238, 235, 231) 0%, rgb(237, 251, 255) 100%) !important;
           padding:70px 20px;
       }
+      
       .premiuim_dresseur  .textPremiuimDresseurs h3{
           color:#013a61;
           padding: 0 20px;
@@ -122,6 +127,7 @@ text-align: center;
     .MuiAlert-root.orange{
         background-color: #cc5500 !important;
     }
+    
     
     .problems h4 {
         margin-top: 30px;
@@ -145,11 +151,10 @@ text-align: center;
 
     }
     .problems img{
-        margin-left: 180px;
         height: 87%;
     }
     .problems li{
-            background: url(./images/icons8-cat-footprint-64.png) no-repeat;
+            background: url(../../images/icons8-cat-footprint-64.png) no-repeat;
             padding-left: 30px;
             padding-bottom: 20px;
             list-style-type: none;
@@ -163,10 +168,9 @@ text-align: center;
 
     }
 
-    .problems p{
+    .prob h6{
         text-align: justify;
         line-height: 1.2em;
-        font-size: 18px;
         font-style: italic;
         color: black;
 
@@ -175,14 +179,15 @@ text-align: center;
 background-color: #edfafe;
 
     }
-    .makeStyles-root-68 {
+    .premiuim_dresseur ul.MuiList-root{
         min-width: 100% !important ;
+        padding-top:60px;
         background-color: #fff0 !important;
         padding-left: 15px !important;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
-height: 350px;
+height: auto;
 }
 .premiuim_dresseur .MuiTypography-colorTextSecondary {
     color: rgb(0, 0, 0);
@@ -199,4 +204,87 @@ height: 350px;
 }
 .premiuim_dresseur .MuiRating-sizeLarge {
 padding-left: 220px;
+}
+.premiuim_dresseur .MuiListItem-root  img{
+    height: 35px;
+}
+/* responsive */
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px)  {
+
+    .nav-link{
+        padding-left:20px ;
+        font-size: 13px !important;
+      }
+      
+  .instruction .MuiPaper-root{
+    
+      align-items: center;
+      font-size: 15px;
+      font-weight: 400;
+      height: 100px;
+      width: 65vw;
+      margin-left: 5px;
+  }
+  .premiuim_dresseur .MuiRating-sizeLarge {
+    padding-left: 105px;
+    }
+    .premiuim_dresseur .textPremiuimDresseurs h3{
+        font-size: 24px;
+    }
+    .premiuim_dresseur .makeStyles-root-56{
+        padding-top:0;
+    }
+
+}
+
+
+
+@media only screen 
+and (min-device-width: 320px) 
+and (max-device-width: 480px)
+ {
+     
+
+    .intro h1{
+        font-size:20px;
+    text-align: center;
+        
+    }
+    .instruction{
+        margin-left: -20px;
+        
+    }
+    .instruction .MuiPaper-root{
+        font-size: 14px;
+        height: 120px;
+        width: 72vw;
+
+
+       
+    }
+.problems .MuiGrid-item {
+    
+    box-sizing: border-box;
+    margin-top: -100px;
+}
+
+.premiuim_dresseur .MuiRating-sizeLarge {
+    padding-left: 100px;
+    }
+
+    .premiuim_dresseur .MuiListItem-root  img{
+        display: none;
+    }
+    
+}
+@media screen 
+  and (min-device-width: 1200px) 
+   { 
+      .problems {
+          padding: 0 200px;
+
+
+}
 }

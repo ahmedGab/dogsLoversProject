@@ -1,0 +1,21 @@
+
+.MuiCardActions-root{
+	float: right;
+}
+.MuiTypography-h5{
+	color:black
+}
+img.card-img-top{
+    border-radius: 50%;
+    position: relative;
+    max-width: 40%;
+    height:auto;
+    top:-90px;
+}
+
+img.card-img-bottom{
+	position: relative;
+	max-width: 15%;
+	left:45px;
+	bottom: -40px;
+}

@@ -5,7 +5,8 @@ import Button from '@material-ui/core/Button';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
+import Logo from "../images/thebest.png"
+import "./carousel.css"
 
 
  
@@ -14,6 +15,7 @@ export default  function Example(props)
 {
 
     var items = [
+       
         {
             name: "Random Name #1",
             description: "https://i2.wp.com/metro.co.uk/wp-content/uploads/2019/03/SEC_59085628.jpg?quality=90&strip=all&zoom=1&resize=644%2C338&ssl=1"
@@ -42,8 +44,8 @@ function Item(props)
             <h2>{props.item.name}</h2>
             <img src={props.item.description} alt=""/>
  
-            <Button className="CheckButton">
-                Check it out!
+            <Button variant="outlined" fullWidth className="CheckButton">
+               <strong> Check it out! </strong>
             </Button>
         </Paper>
     )

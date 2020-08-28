@@ -46,8 +46,7 @@ export default function CenteredGrid() {
     <div>
       <Grid container spacing={2} className={classes.root} >
         <Grid item xs={12}>
-          <Paper className={classes.paper}>xs=12</Paper>
-        </Grid>
+<h1></h1>        </Grid>
         <Grid item xs={6}  >
   <img src={`http://localhost:4000/${data.photo}`}  width="100vh" height="471"/> 
         </Grid>

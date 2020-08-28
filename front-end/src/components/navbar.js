@@ -2,13 +2,13 @@ import React, { Component,Fragment } from "react";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
 MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon,MDBBtn } from "mdbreact";
 import { BrowserRouter as Router } from 'react-router-dom';
-import {logout} from "./actions/user"
+import {logout} from "../actions/user"
 import { connect } from "react-redux";
 
 import axios from "axios"
 import { CircularProgress } from "@material-ui/core";
-import  "./dresseur.css"
-import logo from "./images/logoDL1.png"
+import  "./about/about.css"
+import logo from "../images/logoDL1.png"
 class NavbarPage extends Component {
 state = {
   isOpen: false
@@ -38,15 +38,15 @@ render() {
       {this.state.data ?
       <MDBNavbar  dark expand="md" style={{
         backgroundColor: `${this.state.navBackground}`,
-        // position:"fixed",
+        position:"fixed",
         borderBottom:"1px solid rgba(255, 255, 255, 0.26) ",
         zIndex:"10",
-        width:"100%",
+        width: "100vw",// vw being viewport-width, so 70% of the width of the viewport
 
       
       }}>
         <MDBNavbarBrand>
-          <strong className="white-text"><img className="logoNav" src={logo} alt="" height="50px"></img></strong>
+          <strong className="white-text"><img className="logoNav" src={logo} alt="" /></strong>
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
@@ -69,14 +69,13 @@ render() {
 { this.state.data =="error" || this.state.data =="" ?
               <MDBDropdown basic>
                               <MDBBtn outline color="info" size="sm"  href="/login" >Se connecter</MDBBtn>
-                              <MDBBtn outline color="info" size="sm" href="/register">S'inscrire</MDBBtn>
 
                          </MDBDropdown>:<MDBDropdown basic>
                          <MDBDropdownToggle nav caret>
                          {this.state.data.name +" "+this.state.data.lastname }
                          </MDBDropdownToggle>
                          <MDBDropdownMenu className="dropdown-default">
-                           <MDBDropdownItem  onClick={()=>{this.props.Logout();this.logOut()}}>Se déconnecter</MDBDropdownItem>
+                           <MDBDropdownItem  onClick={()=>{this.logOut();this.props.Logout()}}>Se déconnecter</MDBDropdownItem>
                          </MDBDropdownMenu>
                                        </MDBDropdown>
 }

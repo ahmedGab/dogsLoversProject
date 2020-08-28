@@ -8,6 +8,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Check from '../images/check.png'
+import "./about/about.css"
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -24,6 +25,8 @@ export default function AlignItemsList() {
 
   return (
     <List className={classes.root}>
+          <div className="listP">
+
       <ListItem alignItems="flex-start">
           <img src={Check} alt=""/>
         <ListItemText
@@ -82,6 +85,8 @@ export default function AlignItemsList() {
           }
         />
       </ListItem>
+      </div>
+
     </List>
   );
 }

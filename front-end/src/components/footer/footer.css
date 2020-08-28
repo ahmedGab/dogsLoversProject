@@ -167,6 +167,12 @@ section {
       margin-right: 3px;
       margin-bottom: 5px;
   }
+
+  .footer-left img{
+      max-width: 200px;
+      height: auto;
+  }
+  
   
   /* If you don't want the footer to be responsive, remove these media queries */
   

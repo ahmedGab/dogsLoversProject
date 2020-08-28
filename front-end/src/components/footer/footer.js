@@ -1,6 +1,6 @@
 import React from 'react';
 import "./footer.css"
-import logo from "./images/logoDL1.png"
+import logo from "../../images/logoDL1.png"
 export default function footer() {
   
   return (
@@ -8,7 +8,7 @@ export default function footer() {
     
                 <div className="footer-left">
     
-                    <img src={logo} alt="logo" width="200px"/>
+                    <img src={logo} alt="logo" />
     
                     <p className="footer-links">
                         <a href="#" className="link-1">A propos</a>

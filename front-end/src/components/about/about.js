@@ -1,23 +1,22 @@
 import React,{useState,useEffect, Fragment} from 'react'
 import axios from "axios"
-import Navbar from "./navbar"
-import CardDresseurs from './cardDresseurs'
-import Footer from "./footer"
+import Navbar from "../navbar"
+import Footer from "../footer/footer"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { Menu } from '@material-ui/core'
-import './dresseur.css'
-import recall from "./images/Recall.png"
-import dogsLearn from "./images/dogslearn.jpg"
+import './about.css'
+import recall from "../../images/Recall.png"
 import Box from '@material-ui/core/Box';
-import Carousel from "./components/carousel"
-import Card from "./cardPremium"
+import Carousel from "../carousel"
+import CardP from "../cards/cardPremium"
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import List from "./components/list"
+import List from "../list"
 import Rating from '@material-ui/lab/Rating';
+import Card from "../cards/card"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -88,13 +87,14 @@ return (
 <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={6}>
+
            
-          <Grid item xs={6}>
+          <Grid item xs={12}  sm={6} md={6}>
                   
-          <Card img/>
+          <CardP/>
 
         </Grid>
-        <Grid item xs={6}>            <Card/>
+        <Grid item xs={12}  sm={6} md={6}>            <CardP/>
      </Grid>
  
 
@@ -107,7 +107,7 @@ return (
 <Box display="flex" justifyContent="center" >
 <Box item >
 
-        <img src="https://theonlinedogtrainer.com/wp-content/uploads/2017/09/Aggression-1.png" alt="" width="75px"/>        </Box>
+        <img src="https://theonlinedogtrainer.com/wp-content/uploads/2017/09/Aggression-1.png" alt=""/>        </Box>
         <Box item >
         <Alert severity="error">
         Aucun chien ne naît éduqué. Tous suivent naturellement leur instinct.</Alert>        </Box>
@@ -115,7 +115,7 @@ return (
 <Box display="flex" justifyContent="center" >
        
        <Box item >
-       <img src="https://theonlinedogtrainer.com/wp-content/uploads/2017/09/Puppy.png" alt="" width="75px"/>        </Box>
+       <img src="https://theonlinedogtrainer.com/wp-content/uploads/2017/09/Puppy.png" alt=""/>        </Box>
        <Box item >
        <Alert  className="orange">
        N'hésitez pas à parler et à  communiquer le plus possible avec votre chien. S'il ne comprend pas vos paroles, il décryptera vos sentiments rien qu'au son de votre voix     
@@ -127,7 +127,7 @@ return (
 <Box display="flex" justifyContent="center" >
        
         <Box item >
-        <img src={recall} alt="" width="75px"/>        </Box>
+        <img src={recall} alt="" />        </Box>
         <Box item >
         <Alert severity="info">
         le chien capable d'apprendre près de 200 mots</Alert>        </Box>
@@ -138,7 +138,7 @@ return (
 <Box display="flex" justifyContent="center" >
        
        <Box item >
-       <img src="https://theonlinedogtrainer.com/wp-content/uploads/2017/09/Barking-1.png" alt="" width="75px"/>        </Box>
+       <img src="https://theonlinedogtrainer.com/wp-content/uploads/2017/09/Barking-1.png" alt="" />        </Box>
        <Box item >
        <Alert  severity="warning">
 Vous voulez que votre chien arrête d'aboyer sur les gens, les animaux ou les objets.</Alert>        </Box>
@@ -148,7 +148,7 @@ Vous voulez que votre chien arrête d'aboyer sur les gens, les animaux ou les ob
 
 <Box display="flex" justifyContent="center" >
 <Box item >
-        <img src="https://theonlinedogtrainer.com/wp-content/uploads/2017/09/Walk.png" alt="" width="75px"/>        </Box>
+        <img src="https://theonlinedogtrainer.com/wp-content/uploads/2017/09/Walk.png" alt="" />        </Box>
         <Box item >
         <Alert severity="success">
         Prendre un chien est en effet un engagement sur du long terme et la décision doit être prise de manière réfléchie..</Alert>        </Box>
@@ -160,13 +160,16 @@ Vous voulez que votre chien arrête d'aboyer sur les gens, les animaux ou les ob
         <h4>Comment  mettre en valeur les capacités  de votre chien et savoir l’orienter <div><u><b>pour arrêter les mauvais comportements?</b></u></div></h4>
         <h5>L'un des énoncés suivants vous semble-t-il familier…</h5>
 
-<Box display="flex" justifyContent="center" >
-<Box item >
+        <Grid container >
+
+           
+<Grid   item  sm={6} md={6}>
 
         <img src="https://www.braintraining4dogs.com/get-btfd/assets/dog-problems.jpg" alt=""/>
-        </Box>
-        <Box item >
-        <ul> <h6>
+        </Grid>
+
+           
+<Grid item  sm={6}  md={6}>        <ul> <h6>
                 <li>Votre chien <strong>ne vous écoute pas</strong></li>
                 <li>Votre chien <strong>aboie de manière incontrôlable</strong></li>
                 <li>Votre chien <strong>tire la laisse</strong> </li>
@@ -184,25 +187,29 @@ Vous voulez que votre chien arrête d'aboyer sur les gens, les animaux ou les ob
                 <li>Vous voulez un meilleur lien avec votre chien</li>
                 </h6>
                 <br/>
-                 <p>Presque TOUT problème de comportement auquel vous pouvez penser peut être rapidement et facilement sera résolu avec les techniques des experts éducateurs de canin qui se trouvent <strong>au dessus</strong> <EmojiEmotionsIcon/><EmojiEmotionsIcon/>. </p>
+                <div className="prob">
+                 <h6>Presque TOUT problème de comportement auquel vous pouvez penser peut sera résolu rapidement et facilement  avec les techniques des experts éducateurs de canin qui se trouvent <strong>au dessus</strong> <EmojiEmotionsIcon/><EmojiEmotionsIcon/>. </h6>
+                 </div>
                 </ul>
 
-        </Box>
-        </Box>
+        </Grid>
+        </Grid>
 </div>
 <div className="premiuim_dresseur">
+
+<Grid container >
+
+       
+<Grid   item  sm={6} md={6}>
 <Rating name="size-large" value={5} size="large"  readOnly/>
 
-  <Box display="flex" justifyContent="space-evently" >
-       
-       <Box item >
-      <Carousel/>       </Box>
-       <Box item className="textPremiuimDresseurs">
+      <Carousel/>       </Grid>
+       <Grid   item  sm={6} md={6} item className="textPremiuimDresseurs">
       <h3>
-Ce qui rend leurs système de dressage de chien si unique…</h3><br/><List />     </Box>
+Ce qui rend leurs système de dressage de chien si unique…</h3><br/><List />     </Grid>
         
      
-</Box></div>
+</Grid></div>
 <Footer/>
 </div>:<CircularProgress/>
 
