@@ -1,10 +1,9 @@
 import React, { Component,Fragment } from "react";
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
 MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon,MDBBtn } from "mdbreact";
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {logout} from "../actions/user"
 import { connect } from "react-redux";
-
 import axios from "axios"
 import { CircularProgress } from "@material-ui/core";
 import  "./about/about.css"
@@ -27,6 +26,9 @@ async componentDidMount(){
   const result =await axios.get("http://localhost:4000/dogsLovers/users/profil",{withCredentials:true})
 this.setState({data:result.data})
 }
+profil=()=>{
+  return window.location.href="/detailDresseur"
+  }
  logOut=()=>{
 return window.location.href="/"
 }
@@ -34,7 +36,7 @@ return window.location.href="/"
 render() {
   return (
     
-    <Router>
+    <div>
       {this.state.data ?
       <MDBNavbar  dark expand="md" style={{
         backgroundColor: `${this.state.navBackground}`,
@@ -52,10 +54,10 @@ render() {
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav left>
             <MDBNavItem active>
-              <MDBNavLink to="#!">A propos</MDBNavLink>
+              <MDBNavLink Link to="/home">A propos</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="#!">Educateurs de canins</MDBNavLink>
+              <MDBNavLink to="/listesEducateurs">Educateurs de canins</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
               <MDBNavLink to="#!">Contact</MDBNavLink>
@@ -76,6 +78,8 @@ render() {
                          </MDBDropdownToggle>
                          <MDBDropdownMenu className="dropdown-default">
                            <MDBDropdownItem  onClick={()=>{this.logOut();this.props.Logout()}}>Se déconnecter</MDBDropdownItem>
+                           <MDBDropdownItem  onClick={this.profil}>Mon profil</MDBDropdownItem>
+                      
                          </MDBDropdownMenu>
                                        </MDBDropdown>
 }
@@ -84,7 +88,7 @@ render() {
         </MDBCollapse>
       </MDBNavbar>
 :<CircularProgress/>}
-    </Router>
+    </div>
     );
   }
 }

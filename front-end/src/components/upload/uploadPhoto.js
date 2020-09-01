@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {getPhoto} from "../../actions/photo"
+import {getPhoto} from "../../actions/upload"
 import axios from "axios"
+import "./upload.css"
 
 
 export default function  UploadComponent () {
@@ -34,7 +35,7 @@ export default function  UploadComponent () {
     }
         let imgPreview;
         if (file) {
-            imgPreview = <img src={pic} alt='' />;
+            imgPreview = <img className="imgUpload" src={pic} alt='' />;
         }
                 return (
             <form onSubmit={uploadPhoto}>

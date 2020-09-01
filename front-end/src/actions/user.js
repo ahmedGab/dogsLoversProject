@@ -1,9 +1,9 @@
 import axios from 'axios';
 import {GET_ALL_USERS,ERROR_AUTH} from "./types"
 
-export function AddUsers(name,lastname,email,password,role,tel,lat,lon,ecole,typeDressage,photo){
+export function AddUsers(name,lastname,email,password,role,tel,lat,lon,ecole,typeDressage,photo,video){
     return ()=>
-     axios.post("http://localhost:4000/dogsLovers/users",{name,lastname,email,password,role,tel,lat,lon,ecole,typeDressage,photo},{withCredentials:true}).then(rep=>{
+     axios.post("http://localhost:4000/dogsLovers/users",{name,lastname,email,password,role,tel,lat,lon,ecole,typeDressage,photo,video},{withCredentials:true}).then(rep=>{
         rep.data.role==="visiteur" ?
         window.location.href="/":rep.data.role==="dresseur"?window.location.href="/registerDresseur":alert("no identfier")
        
@@ -12,14 +12,14 @@ export function AddUsers(name,lastname,email,password,role,tel,lat,lon,ecole,typ
 }
 //
 
-export function AddDresseurs(id,name,lastname,email,password,role,tel,lat,lon,ecole,typeDressage,photo){
+export function AddDresseurs(id,name,lastname,email,password,role,tel,lat,lon,ecole,typeDressage,photo,video){
     return (dispatch)=>
     axios.post("http://localhost:4000/dogsLovers/login",{email,password}, {withCredentials:true}).then(rep=>{
         rep.data.role==="dresseur"?
-     axios.put(`http://localhost:4000/dogsLovers/users/${id}`,{name,lastname,email,password,role,tel,lat,lon,ecole,typeDressage,photo},{withCredentials:true}).then(rep=>{
+     axios.put(`http://localhost:4000/dogsLovers/users/${id}`,{name,lastname,email,password,role,tel,lat,lon,ecole,typeDressage,photo,video},{withCredentials:true}).then(rep=>{
          console.log(rep.data)
 if(rep.data==="ok"){
-window.location.href="/"
+window.location.href="/détailDresseur"
 }
 
 }): dispatch(errorAuth(rep.data))}).catch(err=>console.log(err)) 

@@ -16,7 +16,10 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import List from "../list"
 import Rating from '@material-ui/lab/Rating';
-import Card from "../cards/card"
+import CardDresseurs from "../cards/cardDresseurs"
+import { Link } from 'react-router-dom';
+import Map1 from "../map/map1"
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -74,11 +77,12 @@ const Dresseur=()=>{
    
 return (
   <div>
-  {data ?
+  {data   ?
     <div>
       <div  className="header"><Navbar />
 </div>
-
+{ window.location.href==="http://localhost:3000/home" ?
+<>
 <div className="intro">
 <h1>
 
@@ -210,6 +214,48 @@ Ce qui rend leurs système de dressage de chien si unique…</h3><br/><List />  
         
      
 </Grid></div>
+</>:window.location.href==="http://localhost:3000/listesEducateurs" ? 
+
+<Container className={classes.cardGrid} maxWidth="md">
+        <CardDresseurs/>
+        </Container>:window.location.href==="http://localhost:3000/detailDresseur"?
+        
+        <>
+<Grid container  className={classes.root} >
+        <Grid item xs={12}>
+        <div className="profilDresseur">
+        <div className="introprofilDresseur">
+
+        <Grid item xs={9}  >
+        <h1>{data.ecole}</h1>
+        </Grid>
+        <Grid item xs={3}  >
+        <img src={`http://localhost:4000/${data.photo}`}  /> 
+        </Grid>
+          </div>
+
+
+          <video  controls  >
+      <source src={`http://localhost:4000/${data.video}`}  type="video/mp4"/>
+     </video>
+     </div>
+
+        {/* <video autoPlay playInline muted src = "https://www.youtube.com/watch?v=JwQZQygg3Lk&list=RDT3um72hrtrk&index=11"  />  */}
+
+
+<Link to="/registerDresseur"><button  > lien</button>  </Link>      </Grid>
+        <Grid item xs={6}  >
+        </Grid>
+        <Grid item xs={6}  container>
+    
+        </Grid>
+
+      </Grid>
+      <Grid item xs={12}>
+
+        {/* <Map/> */}
+
+        </Grid></>:window.location.href="http://localhost:3000/error"}
 <Footer/>
 </div>:<CircularProgress/>
 

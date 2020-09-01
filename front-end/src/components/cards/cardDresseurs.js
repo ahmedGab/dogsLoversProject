@@ -11,7 +11,8 @@ import Card1 from "./card"
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
-import {getUsers} from "./actions/user"
+import {getUsers} from "../../actions/user"
+import "./card.css"
 
 
 
@@ -82,75 +83,21 @@ export default function Album() {
   };
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-     
-      <main>
-        {/* Hero unit */}
-        <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            <Typography component="h5" style={{ marginTop: "50px" }} variant="h4" align="center" color="textPrimary" gutterBottom>
-              Chercher un ou des dresseurs selon votre choix
-            </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              
-            </Typography>
-            <Grid container spacing={2}>
-            <Grid item xs={6} sm={6}>
-            <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel htmlFor="outlined-age-native-simple">Localisation *</InputLabel>
-        <Select
-          native
-          value={state.age}
-          onChange={handleChange}
-          label="Localisation"
-          inputProps={{
-            name: 'age',
-            id: 'outlined-age-native-simple',
-          }}
-        >
-          <option aria-label="None" value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </Select>
-      </FormControl>
-      </Grid>
-      <Grid item xs={6} sm={6}>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel htmlFor="outlined-age-native-simple">Type de dressage *</InputLabel>
-        <Select
-          native
-          value={state.age}
-          onChange={handleChange}
-          label="Type de dressage "
-          inputProps={{
-            name: 'age',
-            id: 'outlined-age-native-simple',
-          }}
-        >
-          <option aria-label="None" value="" />
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </Select>
-      </FormControl>
-            </Grid>
-            </Grid>
-          </Container>
-        </div>
-        <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
+   
+      <div className="a">
+       
+
+          <Grid container  className="cardsDresseurs" spacing={10} >
+
             {users.map((user) => (
-              <Grid item key={user} xs={12} sm={6} md={4}>
+              <Grid item key={user} xs={12} sm={4} md={4} >
                <Card1 user={user} />
               </Grid>
             ))}
+
           </Grid>
-        </Container>
-      </main>
+
+     </div>
      
-    </React.Fragment>
   );
 }

@@ -50,33 +50,7 @@ export default function RecipeReviewCard({user}) {
   };
 
   return (
-    <>
-      {window.location.href==="http://localhost:3000/"?   <Card className={classes.root}>
-         
-         <CardHeader
-   
-         
-           title=                    "aa"
-   
-           subheader="September 14, 2016"
-         />
-         <CardMedia
-           className={classes.media}
-           image="https://s3.amazonaws.com/thinkific/bundles/bundle_card_image_000/015/786/1541547357.medium.jpg?1541547357"
-           title="Paella dish"
-         />
-         <CardContent>
-           <Typography variant="body2" color="textSecondary" component="p">
-             This impressive paella is a perfect party dish and a fun meal to cook together with your
-             guests. Add 1 cup of frozen peas along with the mussels, if you like.
-           </Typography>
-         </CardContent>
-         <CardActions>
-         <Button href="#text-buttons" color="secondry" >
-     Link
-   </Button>
-         </CardActions>
-       </Card>: <Card className={classes.root}>
+     <Card className={classes.root}>
          
          <CardHeader
    
@@ -101,9 +75,9 @@ export default function RecipeReviewCard({user}) {
      Link
    </Button>
          </CardActions>
-       </Card>}
+       </Card>
 
    
-    </>
+    
   );
 }

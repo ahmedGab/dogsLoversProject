@@ -15,9 +15,8 @@ function App() {
   return (
     <div className="App">
        <Switch>
-       <Route exact path= "/"  component={About}/>
+       <Route exact path= "/(home|listesEducateurs|detailDresseur)/"  component={About}/>
       <Route exact path= "/(register|login|registerDresseur)/"  component={SignUp}/>
-      <Route exact path= "/détailDresseur"  component={DetailDresseur}/>
 
       <Route exact path= "/error"  component={P404}/>
 

@@ -5,9 +5,10 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import {getUsers} from "./actions/user"
 import axios from "axios"
-import Map from "./components/map/map"
 import UploadVideo from "./components/upload/uploadVideo"
-
+import ReactPlayer from 'react-player'
+import v from "./images/3s.mp4"
+import { CircularProgress } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,12 +42,27 @@ export default function CenteredGrid() {
    
   
   },[]);
-
+console.log(data.video)
   return (
+    
     <div>
-      <Grid container spacing={2} className={classes.root} >
+      {data ?
+      <>
+      <Grid container  className={classes.root} >
         <Grid item xs={12}>
-<h1></h1>        </Grid>
+        <div className="profilDresseur">
+
+          <h1>{data.ecole}</h1>
+
+          <video  controls  >
+      <source src={`http://localhost:4000/${data.video}`}  type="video/mp4"/>
+     </video>
+     </div>
+
+        {/* <video autoPlay playInline muted src = "https://www.youtube.com/watch?v=JwQZQygg3Lk&list=RDT3um72hrtrk&index=11"  />  */}
+
+
+<h1>aaaa</h1>        </Grid>
         <Grid item xs={6}  >
   <img src={`http://localhost:4000/${data.photo}`}  width="100vh" height="471"/> 
         </Grid>
@@ -57,9 +73,11 @@ export default function CenteredGrid() {
 
       </Grid>
       <Grid item xs={12}>
-        <Map/>
 
-        </Grid>
+        {/* <Map/> */}
+
+        </Grid></>:<CircularProgress/>
+}
     </div>
   );
 }

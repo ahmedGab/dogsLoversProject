@@ -17,10 +17,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import {AddUsers} from "../../actions/user"
 import {Auth} from "../../actions/user"
 import {AddDresseurs} from "../../actions/user"
+import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
+import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
+
+
 import img1 from "../../images/doglove.png"
 import UploadPhoto from "../upload/uploadPhoto"
 import UploadVideo from "../upload/uploadVideo"
-import Select1 from 'react-select'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -29,8 +32,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import Snackbar from '@material-ui/core/Snackbar';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MuiAlert from '@material-ui/lab/Alert';
-
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import Table from '../table'
+import Map1 from '../map/map1'
 import axios from "axios"
+import Select1 from "../select/select"
 import "./auth.css"
 
 
@@ -93,8 +99,13 @@ const [eroorrepassword,setErrorRepasssword]=useState("")
   const [role,setRole]= useState(data.role)
   const [tel,setTel]= useState(data.tel)
   const [loc,setLoc]= useState("")
-  const [type,setType]= useState(data.type)
-  const [photo,setPhoto]= useState("")
+  const [fb,setFb]= useState(data.facebook)
+  const [desc,setDesc]= useState(data.desc)
+
+  const [youtube,setYoutube]= useState(data.youtube)
+
+  const [img,setImg]= useState(data.photo)
+  const[map,setMap]=useState(data.lat)
   const [lat,setLat]= useState(data.lat)
   const [lon,setLon]= useState(data.lon)
   const [ecole,setEcole]= useState(data.ecole)
@@ -102,17 +113,26 @@ const [eroorrepassword,setErrorRepasssword]=useState("")
   const [eroorLon,setErrorLon]=useState("")
   const [errorRole,setErrorRole]=useState("")
   const [eroorTel,setErrorTel]=useState("")
-  const [errorType,setErrorType]=useState("")
+  const [errorDesc,setErrorDesc]=useState("")
   const [eroorloc,setErrorLoc]=useState("")
   const [errorphoto,setErrorPhoto]=useState("")
   const [errorEcole,setErrorEcole]=useState("")
+  const [errorVideo,setErrorVideo]=useState("")
+  const [errorMap,setErrorMap]=useState("")
+  const [errorImg,setErrorImg]=useState("")
+
+  
+
+
+  const[file,setFile]=useState("")
+  const[pict,setPic]=useState("")
+
   const[picture,setPicture]=useState("")
+  const[video,setVideo]=useState("")
+
   const [open, setOpen] = useState(false);
 
 
-console.log(lat)
-console.log(email)
-console.log(password)
 
   const handleClose = () => {
     setOpen(false);
@@ -122,6 +142,26 @@ console.log(password)
 
   const errorAuth = useSelector(state => state.errorAuth);
   const pic = useSelector(state => state.photo);
+  const videos = useSelector(state => state.video);
+  const Lat=useSelector(state =>state.lat)
+  const Lng=useSelector(state =>state.lng)
+  const region=useSelector(state =>state.loc)
+  const lundi=useSelector(state =>state.lundi)
+  const lundipm=useSelector(state =>state.lundipm)
+  const mardi=useSelector(state =>state.mardi)
+  const mardipm=useSelector(state =>state.mardipm)
+  const mercredi=useSelector(state =>state.mercredipm)
+  const jeudi=useSelector(state =>state.jeudi)
+  const jeudipm=useSelector(state =>state.jeudipm)
+  const vendredi=useSelector(state =>state.vendredi)
+  const vendredipm=useSelector(state =>state.vendredipm)
+  const samedi=useSelector(state =>state.samedi)
+  const samedipm=useSelector(state =>state.samedipm)
+  const dimanche=useSelector(state =>state.dimanche)
+  const dimanchepm=useSelector(state =>state.dimanchepm)
+
+
+
 
   const dispatch = useDispatch();
    async function  getData(){
@@ -152,16 +192,7 @@ const upload=(e)=>{
  })
 }
 console.log(picture)
-const gouvernorats=["Ariana","Béja","Ben Arous","Bizert","zaghouane"]
 
-const options = [
-  { value: 'Ariana', label: 'Ariana' },
-  { value: 'Béja', label: 'Béja' },
-  { value: 'Arous', label: 'Arous' },
-  { value: 'Arous', label: 'Arous' },
-  { value: 'Arous', label: 'Arous' },
-  { value: 'Arous', label: 'Arous' }
-]
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -351,36 +382,74 @@ if(/^[0-9]{8}/g.test(tel)){
   setErrorTel("")
   
 }
-//  if(loc===""){
-//   setErrorLoc("Lieu de résidence obligatoire. ")
-//   formValid=false;
-// }
-// else if(typeof loc!== "undefined" ){
-//  if(/^[a-z]{3,10}/gi.test(loc)===false){
-//      setErrorLoc("Choisir un gouvernorat existante ")
-//      formValid=false;
-//  }
-// }
-if(/^[a-z]{3,10}/gi.test(loc)){
-  setErrorLoc("")
-}
-if(type===""){
-  setErrorType("type obligatoire. ")
+ if(region===""){
+  setErrorLoc("Votre gouvernorat obligatoire. ")
   formValid=false;
 }
-else if(typeof type!== "undefined" ){
- if(/^[a-z]+/g.test(type)===false){
-     setErrorType("error ")
+else if(typeof region!== "undefined" ){
+ if(/^[a-z]{3,11}/gi.test(region)===false){
+     setErrorLoc("Choisir un gouvernorat existante ")
      formValid=false;
  }
 }
-if(/^[a-z]/g.test(loc)){
+if(/^[a-z]{3,11}/gi.test(region)){
   setErrorLoc("")
+}
+
+if(img===""){
+  setErrorImg("Choisir une image  ")
+  formValid=false;
+}
+else if(typeof img!== "undefined" ){
+ if(/^.{5,}\./gi.test(img)===false){
+     setErrorDesc("Choisir une image")
+     formValid=false;
+ }
+}
+if(/^.{2,4}/gi.test(img)){
+  setErrorImg("")
+}
+
+//
+if(video===""){
+  setErrorVideo("Choisir un video  ")
+  formValid=false;
+}
+else if(typeof video!== "undefined" ){
+ if(/^.{5,}\./gi.test(video)===false){
+     setErrorVideo("Choisir une image")
+     formValid=false;
+ }
+}
+if(/^.{2,7}/gi.test(video)){
+  setErrorVideo("")
+}
+//
+if(map===""){
+  setErrorMap("choisir votre localisation ")
+  formValid=false;
+}
+else if(typeof map!== "undefined" ){
+  setErrorMap("choisir votre localisation ")
+
  
 }
-if(/^[a-z]/g.test(type)){
-  setErrorType("")
- 
+if(/^.+/gi.test(img)){
+  setErrorMap("")
+}
+//
+if(desc===""){
+  setErrorDesc("Ecrire une description a propos vous ou votre école  ")
+  formValid=false;
+}
+else if(typeof desc!== "undefined" ){
+ if(/^.{3,}/gi.test(desc)===false){
+     setErrorDesc("Ecrire une description a propos vous ou votre école ")
+     formValid=false;
+ }
+}
+if(/^.{3,}/gi.test(desc)){
+  setErrorDesc("")
 }
 
 
@@ -395,7 +464,7 @@ dispatch(AddUsers(name,lastName,email,password,role))
    }
    if (validation() && role==="dresseur" ){
     
-    dispatch(AddUsers(name,lastName,email,password,role,tel,lat,lon,ecole,type,pic.name))
+    dispatch(AddUsers(name,lastName,email,password,role,tel,lat,lon,ecole,fb,pic.name,videos.name))
        }
 }
 function login(e){
@@ -464,22 +533,63 @@ function registerDresseur(e){
   setOpen(false);
 
 }
-function ap(e){
-  e.preventDefault()
-  dispatch(AddDresseurs(data._id,name,lastName,data.email,password,role,tel,lat,lon,ecole,type,pic.name))
+const uploadSingleFile=(e)=> {
+  setFile(e.target.files[0])
+  setPic(URL.createObjectURL(e.target.files[0]))
+
+}
+const uploadSingleVideo=(e)=>{
+  setVideo(e.target.files[0])
+
+}
+console.log(file.name)
+//upload photo
+const uploadPhoto=(e)=>{
+
+
+ const formData = new FormData()
+ formData.append('photo', file)
+
+ axios.post("http://localhost:4000/image", formData, {withCredentials:true
+ }).then(res => {
+     console.log(res)
+ })
+}
+let imgPreview;
+        if (file) {
+            imgPreview = <img className="imgUpload" src={pict} alt='' />;
+        }
+//uploadvideo
+const uploadVideo=(e)=>{
+
+
+        const formData = new FormData()
+        formData.append('video', video)
+    
+        axios.post("http://localhost:4000/video", formData, {withCredentials:true
+        }).then(res => {
+            console.log(res)
+        })
+      }
+     
+function ap(){
+
+  dispatch(AddDresseurs(data._id,name,lastName,data.email,password,role,tel,Lat,Lng,ecole,region,fb,youtube,video.name,desc,file.name))
   
 
 
 }
+
+
   return (
     <div>
       {data ?
     <Grid container component="main" className={classes.root}>
      
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={6} className={classes.image} />
+      <Grid item xs={false} sm={4} md={5} className={classes.image} />
 
-      <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={8} md={7} component={Paper} elevation={6} square>
       {window.location.href==="http://localhost:3000/register"  ?
 
         <div className={classes.paper}>
@@ -495,6 +605,7 @@ Inscrivez-vous
  </Typography>
           <form className={classes.form} noValidate onSubmit={register}>
           <Grid container spacing={2}>
+
           <Grid item xs={12} sm={6}>
           <TextField
                 autoComplete="fname"
@@ -683,18 +794,17 @@ Inscrivez-vous
 
 <div className={classes.paper}>
 
-  <Typography component="h1" variant="h5">
+  <Typography className="dresseurInsc" component="h1" variant="h5">
   <PetsIcon/>
   &nbsp;
 
-Inscrivez-vous  
-&nbsp; 
+Espace Dresseur&nbsp; 
 <PetsIcon/>
-
+<h6>Completer vos cordonnées pour que ton profil sera affiché</h6>
 </Typography>
   <form className={classes.form} noValidate >
   <Grid container spacing={2}>
-  <Grid item xs={12} sm={6}>
+  <Grid item xs={12} sm={4}>
   <TextField
         autoComplete="fname"
         name="firstName"
@@ -711,7 +821,7 @@ Inscrivez-vous
       <h4 className={classes.error}>{eroorname}</h4>
 
     </Grid>
-    <Grid item xs={12} sm={6}>
+    <Grid item xs={12} sm={4}>
       <TextField
         variant="outlined"
         required
@@ -727,7 +837,7 @@ Inscrivez-vous
                     <h4 className={classes.error}>{eroorlastname}</h4>
 
     </Grid>
-    <Grid item xs={12} sm={6}>
+    <Grid item xs={12} sm={4}>
       <TextField
         variant="outlined"
         required
@@ -743,7 +853,7 @@ Inscrivez-vous
         <h4 className={classes.error}>{eroormail}</h4>
 
     </Grid>
-    <Grid item xs={12} sm={6}>
+    <Grid item xs={12} sm={4}>
       <TextField
         variant="outlined"
         required
@@ -760,57 +870,8 @@ Inscrivez-vous
       <h4 className={classes.error}>{eroorTel}</h4>
 
     </Grid>
-    <Grid item xs={12} sm={6}>
-    <TextField
-        variant="outlined"
-        required
-        fullWidth
-        name="Latitude"
-        label="Latitude"
-        type="text"
-        id="lat"
-        autoComplete="lat"
-        defaultValue={data.lat}
-
-        onChange={e => setLat(e.target.value)}
-      />
-          
-
-
   
-{/*   <select  onChange={e=>setLoc(e.target.value)} size="3" >
-<option value="none" disabled> -- Choisir votre localisation --</option>
-{gouvernorats.map(el=>
-  <option value={el}>{el}</option>)
-}
-
-</select>  */}
-
-
-      <h4 className={classes.error}>{errorLat}</h4>
-
-    </Grid>
-    <Grid item xs={12} sm={6}>
-      <TextField
-        variant="outlined"
-        required
-        fullWidth
-        name="Longtitude"
-        label="Longtitude"
-        type="text"
-        id="lng"
-        autoComplete="tel"
-        defaultValue={data.lon}
-
-        onChange={e => setLon(e.target.value)}
-      />
-      <h4 className={classes.error}>{eroorLon}</h4>
-{console.log(lon)}
-{console.log(lat)}
-{console.log(ecole)}
-
-    </Grid>
-    <Grid item xs={12} sm={6}>
+    <Grid item xs={12} sm={4}>
       <TextField
         variant="outlined"
         required
@@ -826,46 +887,107 @@ Inscrivez-vous
       />
 
     </Grid>
-    <Grid item xs={12} sm={6}>
-    <FormControl variant="outlined" className={classes.formControl}>
-<InputLabel htmlFor="outlined-age-native-simple">Type de dressage *</InputLabel>
-<Select
-  native
-  value={type}
-  onChange={e => setType(e.target.value)}
-  label="Type de dressage "
-      
->
+    <Grid item xs={12}  sm={4}>
+   <Select1/>
+   </Grid>
 
-  <option aria-label="None" value="" />
-  <option value="chien">chien</option>
-  <option value="loup">loup</option>
+    <Grid item xs={12}  sm={4}>
+      <TextField
+        variant="outlined"
+        required
+        fullWidth
+        name="Page Facebook"
+        label="Facebook"
+        type="Page Facebook"
+        id="nomEcPage Facebookole"
+        autoComplete="fb"
+        defaultValue={data.ecole}
+
+        onChange={e => setFb(e.target.value)}
+      />
+
+    </Grid>
+    <Grid item xs={12}  sm={4}>
+      <TextField
+        variant="outlined"
+        required
+        fullWidth
+        name="Youtube"
+        label="Chaine Youtube"
+        type="Youtube"
+        id="Youtube"
+        autoComplete="you"
+        defaultValue={data.ecole}
+
+        onChange={e => setYoutube(e.target.value)}
+      />
+
+    </Grid>
+    <Grid item xs={12} sm={4}>
+                
+    <form >    
  
-</Select>
-<h4 className={classes.error}>{errorType}</h4>
+ <div class="wrap-custom-file video">
+<input type="file"   onChange={uploadSingleVideo} accept=".mp4, .avi, .mov,.mpg" />
+<label  for="video">
+<VideoLibraryIcon/>
+&nbsp;
+<span>Importer un video</span>
+</label>
+</div> 
 
-</FormControl>
+                </form>
+                </Grid>
+               
+<Grid item xs={12} sm={8}>
+<div className="textarea">
+<textarea onchange={e=>setDesc(e.target.value)} rows="5" aria-invalid="false" placeholder="description" className="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline MuiInput-inputMultiline"></textarea>
+</div>
+<h6>{setErrorDesc}</h6>
 </Grid>
-<Grid item xs={12} sm={6}>
   {/* <form onSubmit={upload}>
 <input type="file" name="photo"  className="input-add" placeholder="image"   onChange={e =>{handleInput(e)}}  />
     <p  style={{color: "#d93025"}}>  </p> 
     <button type="submit"  className="upbutton">                   Upload
                 </button>
                 </form> */}
-                <UploadPhoto/>
-  
+               
+               <Grid item xs={12} sm={4}>
+
+<form >
+                <div className="form-group preview">
+                    {imgPreview}
+                </div>
+
                 
+            </form >    
+ 
+            <div class="wrap-custom-file">
+    <input type="file" name="image2" id="image2" onChange={uploadSingleFile} accept=".gif, .jpg, .png" />
+    <label  for="image2">
+<PhotoLibraryIcon/>
+&nbsp;
+      <span>Importer une image</span>
+    </label>
+  </div> 
                 
                 </Grid>
-<Grid item xs={12} sm={6}>
-    <UploadVideo/>
+
+    <Grid item xs={12} md={6} sm={12}>
+
+<Table/>
 </Grid>
+<Grid item xs={12} md={6} sm={12}>
+
+<Map1 zoom={8} center={{ lat: 36.80278	, lng: 10.17972 }} />
+</Grid>
+
     </Grid>
   
     <div>
          <Button
     type="submit"
+
     variant="contained"
     color="primary"
     className={classes.submit}
@@ -901,20 +1023,14 @@ Pour Créer votre espace dresseur, veuillez entrer votre Mot de passe ici  </Dia
           <Button onClick={handleClose} variant="contained" color="secondary">
           Annuler
           </Button>
-          <Button onClick={ap} variant="contained" color="primary">
+          <Button onClick={()=>{uploadPhoto();uploadVideo();ap()}} variant="contained" color="primary">
             Ok
           </Button>
         </DialogActions>
       </Dialog>
     </div>
   
-  <Grid container justify="flex-end">
-    <Grid item>
-      <Link href="#" variant="body2">
-
-      Vous avez déjà un compte? Se connecter              </Link>
-    </Grid>
-  </Grid>
+  
   </form>
 </div>:window.location.href="http://localhost:3000/error" }
       </Grid>

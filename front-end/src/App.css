@@ -35,3 +35,12 @@ font-size:15px}
 
 
 }
+a.btn-info.btn-outline-info:hover{
+  color: #ffffff !important;
+}
+
+.MuiTableContainer-root {
+   
+  background: beige !important;
+}
+

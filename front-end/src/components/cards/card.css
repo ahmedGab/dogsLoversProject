@@ -15,7 +15,20 @@ img.card-img-top{
 
 img.card-img-bottom{
 	position: relative;
-	max-width: 15%;
+	max-width: 20%;
 	left:45px;
-	bottom: -40px;
+	bottom: -50px;
+	height: auto;
+}
+
+.cardsDresseurs .MuiCard-root{
+width: 320px;
+}
+
+.cardsDresseurs .MuiCard-root:hover{
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 22px 0px;
+  transform: matrix(1, 0, 0, 1, 0, -9.62);
+}
+.cardsDresseurs {
+	margin-left: -150px !important
 }
