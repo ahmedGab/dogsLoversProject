@@ -43,7 +43,8 @@ router.get('/' ,async (req,res)=>{
     
            
         })
-        
+    
+
         router.post('/' ,async (req,res)=>{
           
         try{
@@ -57,7 +58,7 @@ router.get('/' ,async (req,res)=>{
            
               
               
-             user=new User(_.pick(req.body,['name','lastname','email','password','role','tel','lat','lon','ecole','typeDressage','photo']))
+             user=new User(_.pick(req.body,['name','lastname','email','password','role','tel','lat','lon','ecole','region','fb','youtube','video','desc','photo']))
              await user.save();
              let token=  user.generateTokens()
 
@@ -89,7 +90,7 @@ router.get('/' ,async (req,res)=>{
                     user = await User.findByIdAndUpdate(req.params.id, req.body, {
                       new: true
                     });
-                    res.send("ok")
+                    res.send(user)
                   } catch (error) {
                     res.send("error");
                   }

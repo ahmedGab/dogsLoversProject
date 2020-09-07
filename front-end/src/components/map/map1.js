@@ -53,6 +53,10 @@ const MyMarker = props => {
             <TileLayer
                 url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
             />
+            {this.state.currentPos===null?
+             <MyMarker position={this.props.center} ></MyMarker>:""
+
+            }
             { this.state.currentPos && <MyMarker position={this.state.currentPos} >
               <Popup position={this.state.currentPos}>
                 Current location: <pre>{JSON.stringify(this.state.currentPos, null, 2)}</pre>

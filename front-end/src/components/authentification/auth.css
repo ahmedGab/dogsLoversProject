@@ -86,6 +86,7 @@ text-align: center;}
 .leaflet-container {
 height: 382px;
 border-radius: 8px;
+z-index:0;
 }
 .MuiTableCell-root {
   padding: 10px !important;

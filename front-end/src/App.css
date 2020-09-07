@@ -9,7 +9,8 @@
 
 
 body {
-	font-family: Roboto, sans-serif;
+  font-family: Roboto, sans-serif;
+  overflow-x: hidden;
 }
 .dropdown-menu{
 position: absolute;
@@ -43,4 +44,10 @@ a.btn-info.btn-outline-info:hover{
    
   background: beige !important;
 }
+
+.listDresseurs .MuiTableContainer-root {
+   
+  background: #f7f7f7 !important;
+}
+
 

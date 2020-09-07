@@ -22,13 +22,10 @@ img.card-img-bottom{
 }
 
 .cardsDresseurs .MuiCard-root{
-width: 320px;
+width: 380px;
 }
 
 .cardsDresseurs .MuiCard-root:hover{
 	box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 22px 0px;
   transform: matrix(1, 0, 0, 1, 0, -9.62);
-}
-.cardsDresseurs {
-	margin-left: -150px !important
 }

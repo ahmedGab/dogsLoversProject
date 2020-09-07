@@ -91,7 +91,8 @@ export default function Album() {
 
             {users.map((user) => (
               <Grid item key={user} xs={12} sm={4} md={4} >
-               <Card1 user={user} />
+               <Card1 user={user} />  &nbsp;&nbsp;&nbsp;
+
               </Grid>
             ))}
 

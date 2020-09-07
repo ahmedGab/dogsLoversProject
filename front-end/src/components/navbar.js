@@ -19,7 +19,7 @@ toggleCollapse = () => {
 }
 async componentDidMount(){
   document.addEventListener("scroll", () => {
-    const backgroundcolor = window.scrollY < 450 ? "rgba(255, 255, 255, 0)" : "#4a90e2";
+    const backgroundcolor = window.scrollY < 450 ? "rgba(6, 1, 68, 0.32)" : "#4a90e2";
 
     this.setState({ navBackground: backgroundcolor });
   })
@@ -27,10 +27,14 @@ async componentDidMount(){
 this.setState({data:result.data})
 }
 profil=()=>{
-  return window.location.href="/detailDresseur"
+  return window.location.href=`/detailDresseur/${this.state.data._id}`
   }
+  Editprofil=()=>{
+    return window.location.href=`/registerDresseur`
+    }
  logOut=()=>{
-return window.location.href="/"
+ localStorage.removeItem("userData") 
+ return window.location.href="/home"
 }
 
 render() {
@@ -77,8 +81,11 @@ render() {
                          {this.state.data.name +" "+this.state.data.lastname }
                          </MDBDropdownToggle>
                          <MDBDropdownMenu className="dropdown-default">
+                         <MDBDropdownItem  onClick={this.profil}>Mon profil</MDBDropdownItem>
+                         <MDBDropdownItem  onClick={this.Editprofil}>Modifier mon profil</MDBDropdownItem>
+
+
                            <MDBDropdownItem  onClick={()=>{this.logOut();this.props.Logout()}}>Se déconnecter</MDBDropdownItem>
-                           <MDBDropdownItem  onClick={this.profil}>Mon profil</MDBDropdownItem>
                       
                          </MDBDropdownMenu>
                                        </MDBDropdown>

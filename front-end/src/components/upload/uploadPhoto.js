@@ -2,52 +2,54 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {getPhoto} from "../../actions/upload"
 import axios from "axios"
+import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import "./upload.css"
 
 
 export default function  UploadComponent () {
 
-  const[file,setFile]=useState(null)
-  const[pic,setPic]=useState(null)
+  const[pic1,setPic1]=useState("")
+ 
+
+
 
   const dispatch =  useDispatch();
 
     
    const uploadSingleFile=(e)=> {
-            setFile(e.target.files[0])
-            setPic(URL.createObjectURL(e.target.files[0]))
+            setPic1(URL.createObjectURL(e.target.files[0]))
+
 
     }
+  //  const SelectFile=(event)=>{
 
     
-     const uploadPhoto=(e)=>{
 
-         e.preventDefault()
-         dispatch(getPhoto(file))
-
-        const formData = new FormData()
-        formData.append('photo', file)
+  //     let files = event.target.files 
+     
+   
+  //  }
     
-        axios.post("http://localhost:4000/image", formData, {withCredentials:true
-        }).then(res => {
-            console.log(res)
-        })
-    }
         let imgPreview;
-        if (file) {
-            imgPreview = <img className="imgUpload" src={pic} alt='' />;
+        if (pic1) {
+            imgPreview = <img className="imgUpload" src={pic1} alt='' />;
+
         }
                 return (
-            <form onSubmit={uploadPhoto}>
-                <div className="form-group preview">
-                    {imgPreview}
-                </div>
+                    <form >
+               <div className="form-group preview">
+                  {imgPreview} 
+              </div> 
 
-                <div className="form-group">
-                    <input type="file" className="form-control" onChange={uploadSingleFile} />
-                </div>
-                <button type="submit" className="btn btn-primary btn-block" >Importer un photo</button>
-            </form >
+                    <div class="wrap-custom-file">
+                    <input type="file" name="image2" id="image2" onChange={e=>{dispatch(getPhoto(e.target.files[0]));uploadSingleFile(e)}} accept=".gif, .jpg, .png" />
+                    <label  for="image2">
+                  <PhotoLibraryIcon/>
+                  &nbsp;
+                      <span>Importer votre photo de profil</span>
+                    </label>
+                  </div> 
+                  </form>
         )
     
 }

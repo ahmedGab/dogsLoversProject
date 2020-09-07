@@ -31,7 +31,7 @@ connectDB();
 app.use(express.json())
 
 
-//
+//upload photo
 const storage = multer.diskStorage({
   destination: "./uploads",
   filename: function (req, file, cb) {
@@ -68,6 +68,56 @@ const upload = multer({
 app.post("/image", (req, res) => {
   upload(req, res, (err) => {
     console.log("image", req.file);
+    if (err) {
+      res.send({ msg: err });
+    } else {
+      if (req.file == undefined) {
+        res.send({ msg: "Error: No File Selected!" });
+      } else {
+        if (req.file) res.send(req.file.filename);
+        else res.send("file undifind");
+      }
+    }
+  });
+});
+
+//uploadvideo
+const storageVideo = multer.diskStorage({
+  destination: "./uploads",
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+
+// Check File Type
+function checkVideoType(file, cb) {
+  // Allowed ext
+  const filetypes = /mp4|avi/;
+  // Check mime
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (mimetype ) {
+    return cb(null, true);
+  } else {
+    cb("Error: Videos Only!");
+  }
+}
+
+
+// Init Upload
+const uploadVideo = multer({
+  storage: storageVideo,
+  limits: { fileSize: 30000000000 },
+  fileFilter: function (req, file, cb) {
+    checkVideoType(file, cb);
+  }
+  
+}).single("video");
+
+app.post("/video", (req, res) => {
+  uploadVideo(req, res, (err) => {
+    console.log("video", req.file);
     if (err) {
       res.send({ msg: err });
     } else {

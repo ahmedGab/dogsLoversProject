@@ -1,4 +1,4 @@
- 
+
 import React,{useState,useEffect} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from '@material-ui/core/Avatar';
@@ -17,8 +17,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import {AddUsers} from "../../actions/user"
 import {Auth} from "../../actions/user"
 import {AddDresseurs} from "../../actions/user"
-import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
-import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
+import {getPhoto} from "../../actions/upload"
+
 
 
 import img1 from "../../images/doglove.png"
@@ -90,7 +90,7 @@ export default function SignInSide() {
   const [eroorname,setErrorName]=useState("")
   const [lastName,setLastName]= useState(data.lastname)
   const [eroorlastname,setErrorLastname]=useState("")
-const [email,setEmail]=useState(data.email);
+const [email,setEmail]=useState("");
 const [eroormail,setErrorMail]=useState("")
 const [password,setPassword]=useState("")
 const [eroorpassword,setErrorPassword]=useState("")
@@ -114,7 +114,7 @@ const [eroorrepassword,setErrorRepasssword]=useState("")
   const [errorRole,setErrorRole]=useState("")
   const [eroorTel,setErrorTel]=useState("")
   const [errorDesc,setErrorDesc]=useState("")
-  const [eroorloc,setErrorLoc]=useState("")
+  const [errorloc,setErrorLoc]=useState("")
   const [errorphoto,setErrorPhoto]=useState("")
   const [errorEcole,setErrorEcole]=useState("")
   const [errorVideo,setErrorVideo]=useState("")
@@ -150,7 +150,8 @@ const [eroorrepassword,setErrorRepasssword]=useState("")
   const lundipm=useSelector(state =>state.lundipm)
   const mardi=useSelector(state =>state.mardi)
   const mardipm=useSelector(state =>state.mardipm)
-  const mercredi=useSelector(state =>state.mercredipm)
+  const mercredi=useSelector(state =>state.mercredi)
+  const mercredipm=useSelector(state =>state.mercredipm)
   const jeudi=useSelector(state =>state.jeudi)
   const jeudipm=useSelector(state =>state.jeudipm)
   const vendredi=useSelector(state =>state.vendredi)
@@ -168,30 +169,35 @@ const [eroorrepassword,setErrorRepasssword]=useState("")
       const result =  await axios.get("http://localhost:4000/dogsLovers/users/profil",{withCredentials:true})
 
       setData(result.data);
+      setEmail(result.data.email)
+      setDesc(result.data.desc)
+      setEcole(result.data.ecole)
+      setTel(result.data.tel)
+
+
+      
   }
  
- useEffect( () => {
-        
-  getData()
-     
+  useEffect( () => {
+getData()
  
+
 },[]);
 
-const handleInput = (e) => {
-  setPicture(e.target.files[0])
-}
-const upload=(e)=>{
-  e.preventDefault()
- const formData = new FormData()
- formData.append('photo', picture)
+// const handleInput = (e) => {
+//   setPicture(e.target.files[0])
+// }
+// const upload=(e)=>{
+//   e.preventDefault()
+//  const formData = new FormData()
+//  formData.append('photo', picture)
 
 
- axios.post("http://localhost:4000/image", formData, {withCredentials:true
- }).then(res => {
-     console.log(res)
- })
-}
-console.log(picture)
+//  axios.post("http://localhost:4000/image", formData, {withCredentials:true
+//  }).then(res => {
+//      console.log(res)
+//  })
+// }
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -316,6 +322,9 @@ else if(typeof password!== "undefined" ){
 
  return formValid
  }
+ console.log(desc)
+ console.log(tel)
+
  function validationDresseur(){
 let formValid=true
 if(name===""){
@@ -368,7 +377,7 @@ else if(typeof email!== "undefined" ){
      setErrorMail("")
  }
 
-if(tel===""){
+if(tel==="" || tel===undefined){
   setErrorTel("numéro de téléphone obligatoire. ")
   formValid=false;
 }
@@ -382,12 +391,12 @@ if(/^[0-9]{8}/g.test(tel)){
   setErrorTel("")
   
 }
- if(region===""){
+ if(region==="" ||region===undefined){
   setErrorLoc("Votre gouvernorat obligatoire. ")
   formValid=false;
 }
 else if(typeof region!== "undefined" ){
- if(/^[a-z]{3,11}/gi.test(region)===false){
+ if(/^[a-z,A-Z]{3,11}/gi.test(region)===false){
      setErrorLoc("Choisir un gouvernorat existante ")
      formValid=false;
  }
@@ -396,66 +405,71 @@ if(/^[a-z]{3,11}/gi.test(region)){
   setErrorLoc("")
 }
 
-if(img===""){
+if( pic===null){
   setErrorImg("Choisir une image  ")
   formValid=false;
 }
-else if(typeof img!== "undefined" ){
- if(/^.{5,}\./gi.test(img)===false){
-     setErrorDesc("Choisir une image")
-     formValid=false;
- }
-}
-if(/^.{2,4}/gi.test(img)){
+else if( pic!==null){
+
+if(/.+/gi.test(pic)){
   setErrorImg("")
 }
+}
 
-//
-if(video===""){
+if(videos==="" || videos===null){
   setErrorVideo("Choisir un video  ")
   formValid=false;
 }
-else if(typeof video!== "undefined" ){
- if(/^.{5,}\./gi.test(video)===false){
-     setErrorVideo("Choisir une image")
-     formValid=false;
- }
-}
-if(/^.{2,7}/gi.test(video)){
+else if(typeof videos!== null ){
+ 
+ if(/^.{2,7}/gi.test(videos)){
   setErrorVideo("")
 }
-//
-if(map===""){
+}
+console.log(videos)
+
+if(Lat===""){
   setErrorMap("choisir votre localisation ")
   formValid=false;
 }
-else if(typeof map!== "undefined" ){
-  setErrorMap("choisir votre localisation ")
-
+else if(typeof Lat!== "" ){
+  if(/^.+/gi.test(Lat)){
+    setErrorMap("")
+  }
  
 }
-if(/^.+/gi.test(img)){
-  setErrorMap("")
-}
+
 //
-if(desc===""){
-  setErrorDesc("Ecrire une description a propos vous ou votre école  ")
+if(ecole==="" ||ecole==undefined){
+  setErrorEcole("Ecrire le nom de votre établissement  ")
   formValid=false;
 }
-else if(typeof desc!== "undefined" ){
+
+else if(typeof desc!== "undefined"  ){
+
+ if(/^.{2,}/gi.test(ecole)){
+  setErrorEcole("")
+}
+}
+if(desc==="" ||desc===undefined ){
+  setErrorDesc("Ecrire une description concernat votre établissement  ")
+  formValid=false;
+}
+else if(typeof desc!== "undefined"  ){
  if(/^.{3,}/gi.test(desc)===false){
      setErrorDesc("Ecrire une description a propos vous ou votre école ")
      formValid=false;
  }
-}
+
 if(/^.{3,}/gi.test(desc)){
   setErrorDesc("")
 }
-
+}
 
 return   formValid
 
  }
+
 function register(e){
   e.preventDefault()
    if (validation() && role==="visiteur" ){
@@ -464,7 +478,7 @@ dispatch(AddUsers(name,lastName,email,password,role))
    }
    if (validation() && role==="dresseur" ){
     
-    dispatch(AddUsers(name,lastName,email,password,role,tel,lat,lon,ecole,fb,pic.name,videos.name))
+    dispatch(AddUsers(name,lastName,email,password,role))
        }
 }
 function login(e){
@@ -482,7 +496,10 @@ function login(e){
 
 
 
-console.log(data)
+console.log(pic)
+console.log(videos)
+
+
 if(data.name && window.location.href==="http://localhost:3000/login"  ){
 return window.location.href="/"  
   //if the token does not exist then page 404 displays
@@ -533,38 +550,34 @@ function registerDresseur(e){
   setOpen(false);
 
 }
-const uploadSingleFile=(e)=> {
-  setFile(e.target.files[0])
-  setPic(URL.createObjectURL(e.target.files[0]))
+// const uploadSingleFile=(e)=> {
+//   setFile(e.target.files[0])
+//   setPic(URL.createObjectURL(e.target.files[0]))
 
-}
-const uploadSingleVideo=(e)=>{
-  setVideo(e.target.files[0])
+// }
+// const uploadSingleVideo=(e)=>{
+//   setVideo(e.target.files[0])
 
-}
-console.log(file.name)
+// }
 //upload photo
 const uploadPhoto=(e)=>{
 
 
  const formData = new FormData()
- formData.append('photo', file)
+ formData.append('photo', pic)
 
  axios.post("http://localhost:4000/image", formData, {withCredentials:true
  }).then(res => {
      console.log(res)
  })
 }
-let imgPreview;
-        if (file) {
-            imgPreview = <img className="imgUpload" src={pict} alt='' />;
-        }
+
 //uploadvideo
 const uploadVideo=(e)=>{
 
 
         const formData = new FormData()
-        formData.append('video', video)
+        formData.append('video', videos)
     
         axios.post("http://localhost:4000/video", formData, {withCredentials:true
         }).then(res => {
@@ -573,9 +586,7 @@ const uploadVideo=(e)=>{
       }
      
 function ap(){
-
-  dispatch(AddDresseurs(data._id,name,lastName,data.email,password,role,tel,Lat,Lng,ecole,region,fb,youtube,video.name,desc,file.name))
-  
+    dispatch(AddDresseurs(data._id,name,lastName,email,password,role,tel,Lat,Lng,ecole,region,fb,youtube,videos.name,desc,pic.name    ,lundi,lundipm,mardi,mardipm,mercredi,mercredipm,jeudi,jeudipm,vendredi,vendredipm,samedi,samedipm,dimanche,dimanchepm))
 
 
 }
@@ -781,7 +792,7 @@ Inscrivez-vous
            </Link>
          </Grid>
          <Grid item>
-           <Link href="#" variant="body2">
+           <Link href="/register" variant="body2">
              {"Vous n'avez pas de compte? Inscrivez-vous"}
            </Link>
          </Grid>
@@ -794,244 +805,257 @@ Inscrivez-vous
 
 <div className={classes.paper}>
 
-  <Typography className="dresseurInsc" component="h1" variant="h5">
-  <PetsIcon/>
-  &nbsp;
+<Typography className="dresseurInsc" component="h1" variant="h5">
+<PetsIcon/>
+&nbsp;
 
 Espace Dresseur&nbsp; 
 <PetsIcon/>
 <h6>Completer vos cordonnées pour que ton profil sera affiché</h6>
 </Typography>
-  <form className={classes.form} noValidate >
-  <Grid container spacing={2}>
+<form className={classes.form} noValidate >
+<Grid container spacing={2}>
+<Grid item xs={12} sm={4}>
+<TextField
+      autoComplete="fname"
+      name="firstName"
+      variant="outlined"
+      required
+      fullWidth
+      id="firstName"
+      label="Nom"
+      autoFocus
+      defaultValue={data.name}
+
+      onChange={e => setName(e.target.value)}
+    />
+    <h4 className={classes.error}>{eroorname}</h4>
+
+  </Grid>
   <Grid item xs={12} sm={4}>
-  <TextField
-        autoComplete="fname"
-        name="firstName"
-        variant="outlined"
-        required
-        fullWidth
-        id="firstName"
-        label="Nom"
-        autoFocus
-        defaultValue={data.name}
+    <TextField
+      variant="outlined"
+      required
+      fullWidth
+      id="lastName"
+      label="Prénom"
+      name="lastName"
+      autoComplete="lname"
+      defaultValue={data.lastname}
+      onChange={e => setLastName(e.target.value)}
+    />
+                 
+                  <h4 className={classes.error}>{eroorlastname}</h4>
 
-        onChange={e => setName(e.target.value)}
-      />
-      <h4 className={classes.error}>{eroorname}</h4>
+  </Grid>
+  <Grid item xs={12} sm={4}>
+    <TextField
+      variant="outlined"
+      required
+      fullWidth
+      id="email"
+      label="Adresse Email "
+      name="email"
+      autoComplete="email"
+      value={data.email}
 
-    </Grid>
-    <Grid item xs={12} sm={4}>
-      <TextField
-        variant="outlined"
-        required
-        fullWidth
-        id="lastName"
-        label="Prénom"
-        name="lastName"
-        autoComplete="lname"
-        defaultValue={data.lastname}
-        onChange={e => setLastName(e.target.value)}
-      />
-                   
-                    <h4 className={classes.error}>{eroorlastname}</h4>
+      onChange={e => setEmail(e.target.value)}
+    />
+      <h4 className={classes.error}>{eroormail}</h4>
 
-    </Grid>
-    <Grid item xs={12} sm={4}>
-      <TextField
-        variant="outlined"
-        required
-        fullWidth
-        id="email"
-        label="Adresse Email "
-        name="email"
-        autoComplete="email"
-        value={data.email}
+  </Grid>
+  <Grid item xs={12} sm={4}>
+    <TextField
+      variant="outlined"
+      required
+      fullWidth
+      name="Numéro de téléphone"
+      label="Numéro de téléphone"
+      type="text"
+      id="tel"
+      autoComplete="tel"
+      defaultValue={data.tel}
 
-        onChange={e => setEmail(e.target.value)}
-      />
-        <h4 className={classes.error}>{eroormail}</h4>
+      onChange={e => setTel(e.target.value)}
+    />
+    <h4 className={classes.error}>{eroorTel}</h4>
 
-    </Grid>
-    <Grid item xs={12} sm={4}>
-      <TextField
-        variant="outlined"
-        required
-        fullWidth
-        name="Numéro de téléphone"
-        label="Numéro de téléphone"
-        type="text"
-        id="tel"
-        autoComplete="tel"
-        defaultValue={data.tel}
+  </Grid>
 
-        onChange={e => setTel(e.target.value)}
-      />
-      <h4 className={classes.error}>{eroorTel}</h4>
+  <Grid item xs={12} sm={4}>
+    <TextField
+      variant="outlined"
+      required
+      fullWidth
+      name="nomEcole"
+      label="Nom d'établissement"
+      type="text"
+      id="nomEcole"
+      autoComplete="tel"
+      defaultValue={data.ecole}
 
-    </Grid>
-  
-    <Grid item xs={12} sm={4}>
-      <TextField
-        variant="outlined"
-        required
-        fullWidth
-        name="nomEcole"
-        label="Nom d'école"
-        type="text"
-        id="nomEcole"
-        autoComplete="tel"
-        defaultValue={data.ecole}
+      onChange={e => setEcole(e.target.value)}
+    />
+    <h4 className={classes.error}>{errorEcole}</h4>
 
-        onChange={e => setEcole(e.target.value)}
-      />
+  </Grid>
+  <Grid item xs={12}  sm={4}>
+ <Select1/>
+ <h4 className={classes.error}>{errorloc}</h4>  </Grid>
 
-    </Grid>
-    <Grid item xs={12}  sm={4}>
-   <Select1/>
-   </Grid>
+  <Grid item xs={12}  sm={4}>
+    <TextField
+      variant="outlined"
+      required
+      fullWidth
+      name="Page Facebook"
+      label="Facebook"
+      type="Page Facebook"
+      id="nomEcPage Facebookole"
+      autoComplete="fb"
+      defaultValue={data.fb}
 
-    <Grid item xs={12}  sm={4}>
-      <TextField
-        variant="outlined"
-        required
-        fullWidth
-        name="Page Facebook"
-        label="Facebook"
-        type="Page Facebook"
-        id="nomEcPage Facebookole"
-        autoComplete="fb"
-        defaultValue={data.ecole}
+      onChange={e => setFb(e.target.value)}
+    />
 
-        onChange={e => setFb(e.target.value)}
-      />
+  </Grid>
+  <Grid item xs={12}  sm={4}>
+    <TextField
+      variant="outlined"
+      required
+      fullWidth
+      name="Youtube"
+      label="Chaine Youtube"
+      type="Youtube"
+      id="Youtube"
+      autoComplete="you"
+      defaultValue={data.youtube}
 
-    </Grid>
-    <Grid item xs={12}  sm={4}>
-      <TextField
-        variant="outlined"
-        required
-        fullWidth
-        name="Youtube"
-        label="Chaine Youtube"
-        type="Youtube"
-        id="Youtube"
-        autoComplete="you"
-        defaultValue={data.ecole}
+      onChange={e => setYoutube(e.target.value)}
+    />
 
-        onChange={e => setYoutube(e.target.value)}
-      />
-
-    </Grid>
-    <Grid item xs={12} sm={4}>
-                
-    <form >    
- 
- <div class="wrap-custom-file video">
-<input type="file"   onChange={uploadSingleVideo} accept=".mp4, .avi, .mov,.mpg" />
-<label  for="video">
-<VideoLibraryIcon/>
-&nbsp;
-<span>Importer un video</span>
-</label>
-</div> 
-
-                </form>
-                </Grid>
-               
-<Grid item xs={12} sm={8}>
-<div className="textarea">
-<textarea onchange={e=>setDesc(e.target.value)} rows="5" aria-invalid="false" placeholder="description" className="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline MuiInput-inputMultiline"></textarea>
-</div>
-<h6>{setErrorDesc}</h6>
-</Grid>
-  {/* <form onSubmit={upload}>
-<input type="file" name="photo"  className="input-add" placeholder="image"   onChange={e =>{handleInput(e)}}  />
-    <p  style={{color: "#d93025"}}>  </p> 
-    <button type="submit"  className="upbutton">                   Upload
-                </button>
-                </form> */}
-               
-               <Grid item xs={12} sm={4}>
-
-<form >
-                <div className="form-group preview">
-                    {imgPreview}
-                </div>
-
-                
-            </form >    
- 
-            <div class="wrap-custom-file">
-    <input type="file" name="image2" id="image2" onChange={uploadSingleFile} accept=".gif, .jpg, .png" />
-    <label  for="image2">
+  </Grid>
+  <Grid item xs={12} sm={4}>
+  {/* <div class="wrap-custom-file video">
+  <input type="file" name="video" id="video"     onChange={uploadSingleVideo} accept=".mp4, .avi, .mov,.mpg"  />
+  <label  for="video">
 <PhotoLibraryIcon/>
 &nbsp;
-      <span>Importer une image</span>
-    </label>
-  </div> 
-                
-                </Grid>
+    <span>Importer un video</span>
+  </label>
+</div> 
+<h4 className={classes.error}>{errorVideo}</h4> */
+}
+<UploadVideo/>
+<h4 className={classes.error}>{errorVideo}</h4> 
+              </Grid>
+             
+<Grid item xs={12} sm={8}>
+<div className="textarea">
+<textarea onChange={e=>setDesc(e.target.value)} rows="5" defaultValue={data.desc} aria-invalid="false" placeholder="description" className="MuiInputBase-input MuiInput-input MuiInputBase-inputMultiline MuiInput-inputMultiline"></textarea>
+</div>
+<h4 className={classes.error}>{errorDesc}</h4>
+</Grid>
+{/* <form onSubmit={upload}>
+<input type="file" name="photo"  className="input-add" placeholder="image"   onChange={e =>{handleInput(e)}}  />
+  <p  style={{color: "#d93025"}}>  </p> 
+  <button type="submit"  className="upbutton">                   Upload
+              </button>
+              </form> */}
+             
+             <Grid item xs={12} sm={4}>
 
-    <Grid item xs={12} md={6} sm={12}>
+{/* <form >
+              <div className="form-group preview">
+                  {imgPreview}
+              </div>
 
-<Table/>
+              
+          </form >    
+
+          <div class="wrap-custom-file">
+  <input type="file" name="image2" id="image2" onChange={pic} accept=".gif  aqsdfghj:+m-p
+  "".jpg, .png" />
+  <label  for="image2">
+<PhotoLibraryIcon/>
+&nbsp;
+    <span>Importer une image</span>
+  </label>
+</div>  */}
+<UploadPhoto/>
+<h4 className={classes.error}>{errorImg}</h4> 
+   
+              </Grid>
+
+
+  <Grid item xs={12} md={6} sm={12}>
+    <p>Horaires de travail</p>
+<Table />
 </Grid>
 <Grid item xs={12} md={6} sm={12}>
-
+<p>Cliquer sur l'emplacement de votre établissement
+</p>
+{data.lat && data.lon ?
+<Map1 zoom={8} center={{ lat: data.lat, lng: data.lon }} />:
 <Map1 zoom={8} center={{ lat: 36.80278	, lng: 10.17972 }} />
+}
+<h4 className={classes.error}>{errorMap}</h4> 
 </Grid>
 
-    </Grid>
-  
-    <div>
-         <Button
-    type="submit"
+  </Grid>
 
-    variant="contained"
-    color="primary"
-    className={classes.submit}
-    fullWidth
-    onClick={registerDresseur}
-  >
-    S'inscrire
-  </Button>
+  <div>
+       <Button
+  type="submit"
+
+  variant="contained"
+  color="primary"
+  className={classes.submit}
+  fullWidth
+  onClick={registerDresseur}
+>
+Valider
+</Button>
+    
+    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
       
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        
-        <DialogContent>
-          <DialogContentText>
+      <DialogContent>
+        <DialogContentText>
 Pour Créer votre espace dresseur, veuillez entrer votre Mot de passe ici  </DialogContentText>
 {errorAuth==="email ou password sont incorrects" ?
-           <Grid item xs={12} sm={12}>
+         <Grid item xs={12} sm={12}>
 
-              <Alert severity="error">{errorAuth} </Alert>
+            <Alert severity="error">{errorAuth} </Alert>
 </Grid>
 :<></>
 }
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Mot de passe"
-            type="password"
-            fullWidth
-            onChange={e=>setPassword(e.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} variant="contained" color="secondary">
-          Annuler
-          </Button>
-          <Button onClick={()=>{uploadPhoto();uploadVideo();ap()}} variant="contained" color="primary">
-            Ok
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  
-  
-  </form>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Mot de passe"
+          type="password"
+          fullWidth
+          onChange={e=>setPassword(e.target.value)}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} variant="contained" color="secondary">
+        Annuler
+        </Button>
+        
+        <Button onClick={()=>{uploadPhoto();uploadVideo(); ap()
+}} variant="contained" color="primary">
+          Confirmer
+
+
+        </Button>
+      </DialogActions>
+    </Dialog>
+  </div>
+
+
+</form>
 </div>:window.location.href="http://localhost:3000/error" }
       </Grid>
       

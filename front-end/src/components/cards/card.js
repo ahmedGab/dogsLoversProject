@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{useState} from 'react';
+import {useDispatch} from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -16,6 +17,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import {getUser} from "../../actions/user"
+import { Link } from 'react-router-dom';
+
 import "./card.css"
 
 const useStyles = makeStyles((theme) => ({
@@ -43,8 +47,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RecipeReviewCard({user}) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] =useState(false);
+  const [id, setId] =useState(user._id);
 
+const dispatch = useDispatch()
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -55,9 +61,9 @@ export default function RecipeReviewCard({user}) {
          <CardHeader
    
          
-           title=                    {user.ecole}
+           title={user.ecole}
    
-           subheader="September 14, 2016"
+           subheader={user.region}
          />
          <CardMedia
            className={classes.media}
@@ -71,12 +77,10 @@ export default function RecipeReviewCard({user}) {
            </Typography>
          </CardContent>
          <CardActions>
-         <Button href="#text-buttons" color="secondry" >
-     Link
-   </Button>
+       <Link to={{pathname:`/detailDresseur/${id}`}}> <Button    style={{backgroundColor:"#45676f",color:"white"}} >Plus de détails
+   </Button></Link> 
          </CardActions>
        </Card>
-
    
     
   );

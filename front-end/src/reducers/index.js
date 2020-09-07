@@ -2,7 +2,10 @@
 import { combineReducers } from 'redux';
 import {userErrorAuth} from './authentification'
 import {usersReducer} from './users'
+import {userReducer} from './user'
 import {photoReducer} from "./photo"
+import {coverPhotoReducer} from "./coverPhoto"
+
 import {videoReducer} from "./video"
 import {LatReducer} from "./lat"
 import {LngReducer} from "./lng"
@@ -17,7 +20,9 @@ import {lundi,lundipm,mardi,mardipm,mercredi,mercredipm,jeudi,jeudipm,vendredi,v
 const allReducers = combineReducers({
     errorAuth:userErrorAuth,
     users:usersReducer,
+    user:userReducer,
     photo:photoReducer,
+    coverPhoto:coverPhotoReducer,
     video:videoReducer,
     lat:LatReducer,
     lng:LngReducer,
@@ -28,7 +33,7 @@ const allReducers = combineReducers({
     mardipm:mardipm,
     mercredi:mercredi,
     mercredipm:mercredipm,
-    jeud:jeudi,
+    jeudi:jeudi,
     jeudipm:jeudipm,
     vendredi:vendredi,
     vendredipm:vendredipm,

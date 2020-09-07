@@ -4,6 +4,7 @@ import './App.css';
 import SignUp from './components/authentification/signup'
 import SignIn from './components/authentification/signin'
 import About from './components/about/about';
+import ProfilDresseur from './components/profile/profileDresseur';
 import DetailDresseur from './détailDresseur';
 import CarteVisiteDresseur from './components/cards/carteVisiteDresseur';
 import { Route, Switch } from "react-router-dom";
@@ -15,8 +16,9 @@ function App() {
   return (
     <div className="App">
        <Switch>
-       <Route exact path= "/(home|listesEducateurs|detailDresseur)/"  component={About}/>
+       <Route exact path= "/(home|listesEducateurs)/"  component={About}/>
       <Route exact path= "/(register|login|registerDresseur)/"  component={SignUp}/>
+      <Route exact path= "/detailDresseur/:id"  component={ProfilDresseur}/>
 
       <Route exact path= "/error"  component={P404}/>
 

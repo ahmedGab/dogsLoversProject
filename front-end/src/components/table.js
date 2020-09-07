@@ -1,5 +1,5 @@
 
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,6 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {lundi,lundipm,mardi,mardipm,mercredi,mercredipm,jeudi,jeudipm,vendredi,vendredipm,samedi,samedipm,dimanche,dimanchepm} from '../actions/workingHours'
+import axios from "axios"
 
 
 
@@ -30,29 +31,27 @@ const rows = [
 
 ];
 export default function SimpleTable() {
-  const[lundi,setLundi]=useState("")
-  const[lundipm,setLundipm]=useState("")
-  const[mardi,setMardi]=useState("")
-  const[mardipm,setMardipm]=useState("")
-  const[mercredi,setMercredi]=useState("")
-  const[mercredipm,setMercredipm]=useState("")
-  const[Jeudi,setJeudi]=useState("")
-  const[Jeudipm,setJeudipm]=useState("")
-  const[Vendredi,setVendredi]=useState("")
-  const[Vendredipm,setVendredipm]=useState("")
-  const[Samedi,setSamedi]=useState("")
-  const[Samedipm,setSamedipm]=useState("")
-  const[Dimanche,setDimanche]=useState("")
-  const[Dimanchepm,setDimanchepm]=useState("")
+       const[data,setData]=useState("")
+       const [role,setRole]=useState("")
 
+       const [errorRole,setErrorRole]=useState("")
 const dispatch=useDispatch()
 
 
+async function  getData(){
+       const result =  await axios.get("http://localhost:4000/dogsLovers/users/profil",{withCredentials:true})
+   
+       setData(result.data);
+   }
+   
+   useEffect( () => {
+         
+   getData()
+      
+   
+   },[]);
 
-
-
-
-
+  
 
 
 
@@ -72,52 +71,51 @@ const dispatch=useDispatch()
         <TableRow key={1}>
               <TableCell >Lundi</TableCell>
             
-              <TableCell align="right"><input onChange={e=>dispatch(lundi(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell>
-              <TableCell align="right"><input onChange={e=>dispatch(lundipm(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell>
+              <TableCell align="right"><input onChange={e=>dispatch(lundi(e.target.value))} defaultValue={data.lundi} type="time" id="appt" name="appt" 
+        /></TableCell>
+              <TableCell align="right"><input onChange={e=>dispatch(lundipm(e.target.value))} defaultValue={data.lundipm} type="time" id="appt" name="appt"
+       /></TableCell>
       </TableRow>
       <TableRow key={2}>
               <TableCell >Mardi</TableCell>
-        <TableCell align="right"><input onChange={e=>dispatch(mardi(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell>
-              <TableCell align="right"><input onChange={e=>dispatch(mardipm(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell> 
+        <TableCell align="right"><input onChange={e=>dispatch(mardi(e.target.value))} defaultValue={data.mardi} type="time" id="appt" name="appt"
+      /></TableCell>
+              <TableCell align="right"><input onChange={e=>dispatch(mardipm(e.target.value))} defaultValue={data.mardipm} type="time" id="appt" name="appt"
+        /></TableCell> 
        </TableRow>
        <TableRow key={3}>
               <TableCell >Mercredi</TableCell>
-       <TableCell align="right"><input onChange={e=>dispatch(mercredi(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell>
-              <TableCell align="right"><input onChange={e=>dispatch(mercredipm(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell>
+       <TableCell align="right"><input onChange={e=>dispatch(mercredi(e.target.value))} defaultValue={data.mercredi} type="time" id="appt" name="appt"/></TableCell>
+              <TableCell align="right"><input onChange={e=>dispatch(mercredipm(e.target.value))} defaultValue={data.mercredipm} type="time" id="appt" name="appt"
+       /></TableCell>
        </TableRow>
        <TableRow key={4}>
               <TableCell >Jeudi</TableCell>
-        <TableCell align="right"><input onChange={e=>dispatch(jeudi(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell>
-              <TableCell align="right"><input onChange={e=>dispatch(jeudipm(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell> 
+        <TableCell align="right"><input onChange={e=>dispatch(jeudi(e.target.value))} defaultValue={data.jeudi} type="time" id="appt" name="appt"
+        /></TableCell>
+              <TableCell align="right"><input onChange={e=>dispatch(jeudipm(e.target.value))} defaultValue={data.jeudipm} type="time" id="appt" name="appt"
+       /></TableCell> 
        </TableRow>
        <TableRow key={5}>
               <TableCell >Vendredi</TableCell>
-       <TableCell align="right"><input onChange={e=>dispatch(vendredi(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell>
-              <TableCell align="right"><input onChange={e=>dispatch(vendredipm(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell> 
+       <TableCell align="right"><input onChange={e=>dispatch(vendredi(e.target.value))} defaultValue={data.vendredi} type="time" id="appt" name="appt"
+       /></TableCell>
+              <TableCell align="right"><input onChange={e=>dispatch(vendredipm(e.target.value))} defaultValue={data.vendredipm} type="time" id="appt" name="appt"
+/></TableCell> 
        </TableRow>
        <TableRow key={6}>
               <TableCell >Samedi</TableCell>
-       <TableCell align="right"><input onChange={e=>dispatch(samedi(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell>
-              <TableCell align="right"><input onChange={e=>dispatch(samedipm(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell> 
+       <TableCell align="right"><input onChange={e=>dispatch(samedi(e.target.value))} defaultValue={data.samedi} type="time" id="appt" name="appt"
+       /></TableCell>
+              <TableCell align="right"><input onChange={e=>dispatch(samedipm(e.target.value))} defaultValue={data.samedipm}type="time" id="appt" name="appt"
+       /></TableCell> 
        </TableRow>
        <TableRow key={7}>
-              <TableCell >Dimanc</TableCell>
-       <TableCell align="right"><input onChange={e=>dispatch(dimanche(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell>
-              <TableCell align="right"><input onChange={e=>dispatch(dimanchepm(e.target.value))} type="time" id="appt" name="appt"
-       min="09:00" max="18:00" required/></TableCell>
+              <TableCell >Dimanche</TableCell>
+       <TableCell align="right"><input onChange={e=>dispatch(dimanche(e.target.value))} defaultValue={data.dimanche} type="time" id="appt" name="appt"
+       /></TableCell>
+              <TableCell align="right"><input onChange={e=>dispatch(dimanchepm(e.target.value))} defaultValue={data.dimanchepm} type="time" id="appt" name="appt"
+     /></TableCell>
             </TableRow>
             
          

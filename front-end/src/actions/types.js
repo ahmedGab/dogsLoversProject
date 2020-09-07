@@ -1,6 +1,8 @@
 export const ERROR_AUTH="ERROR_AUTH"
 export const GET_ALL_USERS="GET_ALL_USERS"
+export const GET_USER="GET_USER"
 export const GET_PHOTO="GET_PHOTO"
+export const GET_COVER="GET_COVER"
 export const GET_VIDEO="GET_VIDEO"
 export const GET_LAT="GET_LAT"
 export const GET_LNG="GET_LNG"

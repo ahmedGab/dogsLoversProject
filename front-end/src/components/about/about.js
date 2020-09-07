@@ -7,6 +7,8 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { Menu } from '@material-ui/core'
 import './about.css'
+import Button from "@material-ui/core/Button";
+
 import recall from "../../images/Recall.png"
 import Box from '@material-ui/core/Box';
 import Carousel from "../carousel"
@@ -18,8 +20,6 @@ import List from "../list"
 import Rating from '@material-ui/lab/Rating';
 import CardDresseurs from "../cards/cardDresseurs"
 import { Link } from 'react-router-dom';
-import Map1 from "../map/map1"
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -66,7 +66,10 @@ const Dresseur=()=>{
     const [data, setData] = useState("");
     async function getData(){
         const result =await axios.get("http://localhost:4000/dogsLovers/users/profil",{withCredentials:true})
-
+        if(result.data!=="error" && result.data.lat){
+          localStorage.setItem("userData",JSON.stringify(result.data))
+          }
+         
         setData(result.data);
        }  
     useEffect( () => {
@@ -74,7 +77,8 @@ const Dresseur=()=>{
         getData()
   
  },[]);
-   
+
+
 return (
   <div>
   {data   ?
@@ -216,46 +220,9 @@ Ce qui rend leurs système de dressage de chien si unique…</h3><br/><List />  
 </Grid></div>
 </>:window.location.href==="http://localhost:3000/listesEducateurs" ? 
 
-<Container className={classes.cardGrid} maxWidth="md">
+<Container className={classes.cardGrid} >
         <CardDresseurs/>
-        </Container>:window.location.href==="http://localhost:3000/detailDresseur"?
-        
-        <>
-<Grid container  className={classes.root} >
-        <Grid item xs={12}>
-        <div className="profilDresseur">
-        <div className="introprofilDresseur">
-
-        <Grid item xs={9}  >
-        <h1>{data.ecole}</h1>
-        </Grid>
-        <Grid item xs={3}  >
-        <img src={`http://localhost:4000/${data.photo}`}  /> 
-        </Grid>
-          </div>
-
-
-          <video  controls  >
-      <source src={`http://localhost:4000/${data.video}`}  type="video/mp4"/>
-     </video>
-     </div>
-
-        {/* <video autoPlay playInline muted src = "https://www.youtube.com/watch?v=JwQZQygg3Lk&list=RDT3um72hrtrk&index=11"  />  */}
-
-
-<Link to="/registerDresseur"><button  > lien</button>  </Link>      </Grid>
-        <Grid item xs={6}  >
-        </Grid>
-        <Grid item xs={6}  container>
-    
-        </Grid>
-
-      </Grid>
-      <Grid item xs={12}>
-
-        {/* <Map/> */}
-
-        </Grid></>:window.location.href="http://localhost:3000/error"}
+        </Container>:window.location.href="http://localhost:3000/error"}
 <Footer/>
 </div>:<CircularProgress/>
 
