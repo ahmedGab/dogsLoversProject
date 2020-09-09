@@ -20,6 +20,7 @@ import List from "../list"
 import Rating from '@material-ui/lab/Rating';
 import CardDresseurs from "../cards/cardDresseurs"
 import { Link } from 'react-router-dom';
+import Spinner from "../spinner/spinner"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -224,7 +225,7 @@ Ce qui rend leurs système de dressage de chien si unique…</h3><br/><List />  
         <CardDresseurs/>
         </Container>:window.location.href="http://localhost:3000/error"}
 <Footer/>
-</div>:<CircularProgress/>
+</div>:<Spinner/>
 
   }
    </div>

@@ -13,7 +13,6 @@ state = {
   isOpen: false
   ,data:""
 };
-
 toggleCollapse = () => {
   this.setState({ isOpen: !this.state.isOpen });
 }
@@ -38,10 +37,11 @@ profil=()=>{
 }
 
 render() {
+  const exist=JSON.parse(localStorage.getItem("userData"))
+
   return (
     
     <div>
-      {this.state.data ?
       <MDBNavbar  dark expand="md" style={{
         backgroundColor: `${this.state.navBackground}`,
         position:"fixed",
@@ -64,7 +64,7 @@ render() {
               <MDBNavLink to="/listesEducateurs">Educateurs de canins</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBNavLink to="#!">Contact</MDBNavLink>
+              <MDBNavLink to="/contact">Contact</MDBNavLink>
             </MDBNavItem>
             
           </MDBNavbarNav>
@@ -72,13 +72,13 @@ render() {
            
             
             <MDBNavItem>
-{ this.state.data =="error" || this.state.data =="" ?
+{ exist._id==true ?
               <MDBDropdown basic>
                               <MDBBtn outline color="info" size="sm"  href="/login" >Se connecter</MDBBtn>
 
                          </MDBDropdown>:<MDBDropdown basic>
                          <MDBDropdownToggle nav caret>
-                         {this.state.data.name +" "+this.state.data.lastname }
+                         {exist.name +" "+exist.lastname }
                          </MDBDropdownToggle>
                          <MDBDropdownMenu className="dropdown-default">
                          <MDBDropdownItem  onClick={this.profil}>Mon profil</MDBDropdownItem>
@@ -94,7 +94,7 @@ render() {
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>
-:<CircularProgress/>}
+
     </div>
     );
   }

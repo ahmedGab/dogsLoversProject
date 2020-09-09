@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,17 +9,15 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { makeStyles } from '@material-ui/core/styles';
 
 
-const useStyles = makeStyles((theme) => ({
-    
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    }
-    
-  }));
-export default function FormDialog() {
-    const classes = useStyles();
 
-  const [open, setOpen] = React.useState(false);
+export default function FormDialog(props) {
+
+  const user=JSON.parse(localStorage.getItem("userData"))
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState(user.email);
+  const [tel, setTel] = useState(user.tel);
+  const [pass, setPass] = useState("");
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,14 +30,12 @@ export default function FormDialog() {
   return (
     <div>
          <Button
+         style={props.style}
     type="submit"
-    variant="contained"
-    color="primary"
-    className={classes.submit}
-    fullWidth
+    variant={props.variant}
     onClick={handleClickOpen}
   >
-    S'inscrire
+    {props.nom}
   </Button>
       
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -55,15 +51,36 @@ export default function FormDialog() {
             id="name"
             label="Email Address"
             type="email"
+            value={email}
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Numéro de téléphone"
+            type="text"
+            defaultValue={tel}
+            onChange={e=>setTel(e.target.value)}
+            fullWidth
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Mot de passe"
+            type="password"
+            onChange={e=>setPass(e.target.value)}
+
             fullWidth
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
+          <Button onClick={handleClose} style={{backgroundColor:"#ed5e67"}}>
+          Annuler
           </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
+          <Button onClick={handleClose}  style={{backgroundColor:"#337aed"}}>
+            Confirmer
           </Button>
         </DialogActions>
       </Dialog>

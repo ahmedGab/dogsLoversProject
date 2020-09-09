@@ -1,0 +1,27 @@
+.listes_activity  img{ 
+   padding: 20px;
+    margin-top:80px;
+    background-color: #444;
+  
+     width: 130px;
+     height: 130px;
+     font-size: 45px;
+     border-radius: 20%;
+   
+      transition: all .3s ease;
+     box-shadow: 0 5px 5px rgb(7, 0, 0);
+     
+   }
+   
+   .listes_activity h6{
+   
+      margin-top: 30px;
+     
+  
+   }
+   .btnPrem :hover{
+      border-radius:20px !important;
+      background-color: rgb(30, 215, 96) !important; 
+        }
+
+       

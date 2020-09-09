@@ -31,7 +31,6 @@ export default class MapDisplay extends Component {
         <Map
           center={position}
           zoom={initialState.zoom}
-          style={{ height: "400px" }}
         >
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

@@ -9,6 +9,9 @@ import DetailDresseur from './détailDresseur';
 import CarteVisiteDresseur from './components/cards/carteVisiteDresseur';
 import { Route, Switch } from "react-router-dom";
 import P404 from './components/404/404'
+import pagePremiuim from './components/premiuim/pagePremiuim'
+import contact from './components/contact/contact'
+import Dashboard from './components/dashboard/Dashboard'
 
 
 
@@ -19,6 +22,11 @@ function App() {
        <Route exact path= "/(home|listesEducateurs)/"  component={About}/>
       <Route exact path= "/(register|login|registerDresseur)/"  component={SignUp}/>
       <Route exact path= "/detailDresseur/:id"  component={ProfilDresseur}/>
+      <Route exact path= "/premiuim"  component={pagePremiuim}/>
+      <Route exact path= "/contact"  component={contact}/>
+      <Route exact path= "/admin"  component={Dashboard}/>
+
+
 
       <Route exact path= "/error"  component={P404}/>
 

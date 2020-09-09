@@ -14,6 +14,9 @@ import Footer from "../footer/footer"
 import {getUser} from "../../actions/user"
 import axios from "axios"
 import UploadCoverPhoto from "../upload/uploadCoverPhoto"
+import ModalPremiuim from "../premiuim/modalPremiuim"
+import Spinner from "../spinner/spinner"
+
 
 import "./profile.css"
 
@@ -72,12 +75,16 @@ console.log(user.video)
        
        }
        const exist=JSON.parse(localStorage.getItem("userData"))._id
-       console.log(exist)
     return (
+      <>
+      { user._id ?
+
         <div>
           {user._id==exist &&pic?
           
           <div  className="profil" style={{backgroundImage:`url(http://localhost:4000/${user.coverimg})` ,height:"550px", backgroundPosition: "50% 20%",backgroundRepeat: "no-repeat",backgroundSize:"cover", width:"100%"}}>
+                              < ModalPremiuim />
+
             <Navbar/>
             <UploadCoverPhoto/>
             <button className="cover_image" onClick={uploadPhoto}>Confirmer</button>
@@ -151,7 +158,9 @@ console.log(user.video)
 
         </Grid>      </Grid>
         <Footer/>
-        </div>
+        </div>: <Spinner/>
+        }
+        </>
     );
 };
 
