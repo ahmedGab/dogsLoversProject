@@ -39,7 +39,6 @@ export default class MapDisplay extends Component {
           <Marker position={position}>
        
           <Popup>
-         { JSON.parse(localStorage.getItem("userData")).tel}
     </Popup>
     </Marker>
         </Map>:<p>attendez</p> }</>

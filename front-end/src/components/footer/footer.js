@@ -1,6 +1,7 @@
 import React from 'react';
 import "./footer.css"
 import logo from "../../images/logoDL1.png"
+import {Link} from 'react-router-dom'
 export default function footer() {
   
   return (
@@ -11,33 +12,36 @@ export default function footer() {
                     <img src={logo} alt="logo" />
     
                     <p className="footer-links">
-                        <a href="#" className="link-1">A propos</a>
+                        <Link to="/">Acceuil</Link>
                         
-                        <a href="#">Dresseurs</a>
+                        <Link to="/listesEducateurs">Educateurs de canins</Link>
                     
-                        <a href="#">contact</a>
+                        <Link to="/contact">Contact</Link>
+                        <Link to="/premiuim">Premiuim</Link>
+
+
                     
                       
                     </p>
     
-                    <p className="footer-company-name">Company Name © 2020</p>
+                    <p className="footer-company-name">DogsLovers © 2020</p>
                 </div>
     
                 <div className="footer-center">
     
                     <div>
                         <i className="fa fa-map-marker"></i>
-                        <p><span>aaaaa</span> aaaaa</p>
+                        <p>Ben Arous</p>
                     </div>
     
                     <div>
                         <i className="fa fa-phone"></i>
-                        <p>2222222222</p>
+                        <p>29737939</p>
                     </div>
     
                     <div>
                         <i className="fa fa-envelope"></i>
-                        <p><a href="mailto:support@company.com">support@company.com</a></p>
+                        <p>support@dogsLovers.com</p>
                     </div>
     
                 </div>
@@ -45,8 +49,7 @@ export default function footer() {
                 <div className="footer-right">
     
                     <p className="footer-company-about">
-                        <span>About the company</span>
-                        Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+                    Vous cherchez dressage de qualité près de chez vous avec un service qualifié pour votre chien ,<span style={{fontWeight:600,fontSize:'19px'}}> DogsLovers</span>  le meilleur guide en tunisie.
                     </p>
     
                     <div className="footer-icons">

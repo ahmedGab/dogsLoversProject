@@ -109,4 +109,12 @@ router.get('/' ,async (req,res)=>{
                       res.send("user not found")
               }
       })
+      router.delete('/:id' ,async(req,res)=>{
+        let deletedUser=await User.findByIdAndRemove(req.params.id)
+          
+                res.send(deletedUser)
+           
+        })
+
+
         module.exports = router

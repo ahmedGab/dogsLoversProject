@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect, useState}from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -15,25 +15,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Navbar from "../navbar"
-import "../about/about.css"
+import "../home/home.css"
 import "./premuim.css"
 import dog from "../../images/pet (1).svg"
 import files from "../../images/photo.svg"
 import dresseur from "../../images/man.svg"
 import Footer from "../footer/footer"
 import ModalConfirmationPremiuim from "./dialog"
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -121,7 +110,6 @@ export default function Pricing() {
 
   return (
     <div style={{backgroundColor:"white"}}>
-      <CssBaseline />
       <div  className="header">
       <Navbar/>
         </div>

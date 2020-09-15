@@ -1,4 +1,6 @@
-import React from 'react';
+import React,{ useState ,useEffect} from 'react';
+import { useDispatch, useSelector } from "react-redux";
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -21,19 +23,10 @@ import MailOutlineTwoToneIcon from '@material-ui/icons/MailOutlineTwoTone';
 import Map from "../map/map"
 import Navbar from "../navbar"
 import Footer from "../footer/footer"
+import axios from 'axios'
+import {AddReclamation, reponseReclamation} from "../../actions/reclamations"
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -63,14 +56,17 @@ const useStyles = makeStyles((theme) => ({
 
   },
   avatar: {
-    backgroundColor: '#b6a88e ',
     width:'300px',
     height:'70px',
     boxShadow:'rgba(0, 0, 0, 0.18) 0px 5px 11px 0px, rgba(0, 0, 0, 0.15) 0px 4px 15px 0px',
     position:'relative',
     top:'-35px',
     right:'0',
+    left:'09px',
     borderRadius:'4px' ,
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
     [theme.breakpoints.down('sm')]: {
         width:'85%',
         left:'3%',
@@ -95,12 +91,12 @@ alignItems:"center",
       }
   },
   icon:{
-fontSize:'50px'
+fontSize:'42px'
   },
   textrect:{
       color:'white',
       textAlign:'center',
-      marginTop: '-32px',
+    
       [theme.breakpoints.down('sm')]: {
         fontSize:"5vw"
       }
@@ -114,25 +110,185 @@ fontSize:'50px'
   },
   [theme.breakpoints.up('sm')]: {
       paddingTop:"100px"
-}
+},
+
+},
+error:{
+  paddingTop:'3px',
+  color:"red",
+  fontSize:'13px'
 }
 }));
 
 export default function SignInSide() {
   const classes = useStyles();
 
+  const [data, setData] = useState("")
+const [msg,setMsg]=useState("Veuillez nous contactez")
+const [color,setColor]=useState('rgb(47,30,14)')
+  const [name, setName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [email, setEmail] = useState("")
+  const [objet, setObjet] = useState("")
+  const [message, setMessage] = useState("")
+
+  const [errorname,setErrorName]=useState("")
+  const [errorlastname,setErrorLastname]=useState("")
+const [errormail,setErrorMail]=useState("")
+const [errorObjet,setErrorObjet]=useState("")
+const [errorMessage,setErrorMessage]=useState("")
+
+function validation(){
+  let formValid=true;
+  if(typeof name==="undefined" || name===""){
+    setErrorName("Nom obligatoire. ")
+    formValid=false;
+}
+else if(typeof name!== "undefined" ){
+   if(/^[a-z,A-z]/g.test(name)===false){
+       setErrorName("le nom doit étre des caractéres")
+       formValid=false;
+   }
+   else if(/^[a-z,A-z]{3,40}/g.test(name)===false){
+    setErrorName("le nom doit étre minimum 3 caractéres")
+    formValid=false;
+  }
+}
+   if( name!=undefined && /^[a-z,A-z]{3,40}/g.test(name) ){
+       setErrorName("")
+   }
+   if(typeof lastName==="undefined" ||lastName===""){
+    setErrorLastname("Prénom obligatoire. ")
+    formValid=false;
+}
+else if(typeof lastName!== "undefined" ){
+   if(/^[a-z,A-z]/g.test(lastName)===false){
+       setErrorLastname("le nom doit étre des caractéres")
+       formValid=false;
+   }
+   else if(  /^[a-z,A-z]{3,40}/g.test(lastName)===false){
+    setErrorLastname("le nom doit étre minimum 3 caractéres")
+    formValid=false;
+}
+
+  }
+   if( lastName!=undefined &&/^[a-z,A-z]{3,40}/g.test(lastName)){
+       setErrorLastname("")
+   }
+   if(typeof email==="undefined"||email===""){
+    setErrorMail("Entrez votre email. ")
+    formValid=false;
+}
+else if(email== "undefined" ){
+   if(/^\w[\w|.]{5,30}@[a-z]{3,6}\.[a-z]{2,3}/g.test(email)===false){
+       setErrorMail("Votre email doit comprendre entre 5 et 30 caractéres =")
+       formValid=false;
+
+   }
+  }
+   if(/^\w[\w|.]{5,30}@[a-z]{3,6}\.[a-z]{2,3}/g.test(email)){
+       setErrorMail("")
+   }
+  
+
+   if( /^.{5,20}$/gi.test(objet)==false ){
+    setErrorObjet("Votre objet doit comprendre entre 5 et 25 lettres")
+    formValid=false;
+}
+if( /^.{5,20}$/gi.test(objet)){
+  setErrorObjet("")
+}
+
+
+if(/^.{5,50}$/gi.test(message)==false ){
+  setErrorMessage("Votre message doit comprendre entre 5 et 50 lettres")
+  formValid=false;
+}
+if( /^.{5,50}$/gi.test(message)){
+setErrorMessage("")
+}
+
+
+
+
+
+
+
+
+return formValid
+}
+
+
+ 
+ 
+  let user=""
+function getDataUsers(){
+  if(JSON.parse(localStorage.getItem("userData"))){
+    user=JSON.parse(localStorage.getItem("userData"))
+    setName(user.name)
+    setLastName(user.lastname)
+    setEmail(user.email)
+
+    }
+  }
+
+  async function  getData(){
+    const result =  await axios.get("http://localhost:4000/dogsLovers/users/profil",{withCredentials:true})
+   setData(result)
+
+
+    
+}
+const dispatch = useDispatch()
+const reponse = useSelector(state => state.reponse)
+useEffect( () => {
+  getData()
+  getDataUsers()
+
+  
+  },[]);
+  function addReclamation(e){
+    e.preventDefault()
+    if(!JSON.parse(localStorage.getItem("userData"))){
+    setMsg("D'abord se connecter")
+    setColor("red")
+    }
+    if( JSON.parse(localStorage.getItem("userData"))&& validation() &&reponse!="error"){
+      let date = new Date()
+
+
+    dispatch(AddReclamation( new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()))
+    ,name,lastName,email,objet,message))
+     setMsg("Votre message a été envoyé")
+     setColor("green")
+
+     setTimeout(() => {
+      setMsg("Veuillez nous contactez")
+       setColor('rgb(47,30,14)')
+    
+    }, 5000);
+      
+    }
+   
+  }
+  
+  console.log(user.name)
+
   return (
+    
       <>
       <div className="header">
           <Navbar/>
       </div>
+
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={12} sm={6} md={6} lg={5} component={Paper}>
         <div className={classes.paper}>
-          <div className={classes.avatar} xs={false} >
-          <EmailTwoToneIcon  className={classes.icon} style={{color:"white"}}/>
-             <h3 className={classes.textrect}>Contacter </h3> 
+          <div style={{backgroundColor:color}} className={classes.avatar} xs={false} >
+
+          <EmailTwoToneIcon  className={classes.icon} style={{ marginTop:"-10px",color:"white"}}/>
+             <h4 className={classes.textrect}>{msg} </h4> 
 
           </div>
           <Typography component="h1" variant="h5">
@@ -145,7 +301,10 @@ export default function SignInSide() {
           <Grid item>
             <TextField className={classes.input}
              id="input-with-icon-grid" 
-             label="Nom" />
+             label="Nom Complet"
+             value={name +" "+lastName}
+             />
+             <h6 className={classes.error}>{errorname + errorlastname }</h6>
           </Grid>
         </Grid>
         <Grid container spacing={1} alignItems="flex-end">
@@ -156,7 +315,11 @@ export default function SignInSide() {
             <TextField 
             className={classes.input} 
             id="input-with-icon-grid" 
-            label="Adresse email" />
+            label="Adresse email"
+            value={email}
+            />
+        <h6 className={classes.error}>{errormail }</h6>
+
           </Grid>
         </Grid>
         <Grid container spacing={1} alignItems="flex-end">
@@ -167,7 +330,11 @@ export default function SignInSide() {
             <TextField 
             className={classes.input} 
             id="input-with-icon-grid" 
-            label="Sujet" />
+            label="Objet" 
+            onChange={e=>setObjet(e.target.value)}
+            />
+          <h6 className={classes.error}>{errorObjet }</h6>
+
           </Grid>
           </Grid>
           <Grid container spacing={1} alignItems="flex-end">
@@ -182,23 +349,23 @@ className={classes.input}
           label="Message"
           multiline
           rows={4}
-          defaultValue=""
+          onChange={e=>setMessage(e.target.value)}
+
         />
+                  <h6 className={classes.error}>{errorMessage }</h6>
+
 </Grid>
 </Grid>
        <div className={classes.submit}>          
        <Button
               type="submit"
               variant="contained"
-              style={{backgroundColor:"#b6a88e ",width:'90px',height:'40px'}}
+              style={{backgroundColor:color,width:'90px',height:'40px'}}
+              onClick={(e)=>addReclamation(e)}
             >
               Envoyer
             </Button>
             </div>
-        
-           
-           
-            
           </form>
         </div>
       </Grid>

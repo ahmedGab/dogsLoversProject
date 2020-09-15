@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import logo from "../../images/prem.jpg"
+import {Link} from 'react-router-dom'
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -65,9 +66,6 @@ export default function CustomizedDialogs() {
     setOpen(false);
   };
 
-  const PagePremiuim =()=>{
-     return window.location.href='/premiuim'
-  }
 
   return (
     <div>
@@ -80,9 +78,9 @@ export default function CustomizedDialogs() {
         <img src={logo} alt="logoPremiuim" />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus  style={{backgroundColor:"#2c76b8"}} onClick={PagePremiuim} color="primary">
-            Save changes
-          </Button>
+         <Link to ="/premiuim"> <Button autoFocus  style={{backgroundColor:"#2c76b8"}}  color="primary">
+            Découvrir
+          </Button> </Link>
         </DialogActions>
       </Dialog>
     </div>

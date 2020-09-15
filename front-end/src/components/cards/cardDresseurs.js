@@ -12,6 +12,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import {getUsers} from "../../actions/user"
+import Pagination from '@material-ui/lab/Pagination';
+
+
 import "./card.css"
 
 
@@ -53,12 +56,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Album() {
+export default function CardDresseur(props) {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    age: '',
-    name: 'hai',
-  });
+  const itemsPerPage = 9;
+  const [page, setPage] = useState(1);
   const dispatch = useDispatch()
 
   const users = useSelector(state => state.users);
@@ -72,33 +73,46 @@ export default function Album() {
   },[]);
   console.log(users)
 
-
-
-  const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
+  const handleChange = (event, value) => {
+    setPage(value);
   };
 
+
   return (
-   
-      <div className="a">
+   <>
        
 
           <Grid container  className="cardsDresseurs" spacing={10} >
 
-            {users.map((user) => (
+            {props.name !="" ?users.slice((page - 1) * itemsPerPage, page * itemsPerPage).filter(el=>props.region!="Gouvernorats" ?
+             el.region==props.region && el.name.includes(props.name)
+             : el.name.includes(props.name))
+             .map((user) => (
               <Grid item key={user} xs={12} sm={4} md={4} >
-               <Card1 user={user} />  &nbsp;&nbsp;&nbsp;
+               <Card1 key={user} user={user} />  
+
+              </Grid>)):
+              users.slice((page - 1) * itemsPerPage, page * itemsPerPage).
+              filter(el=>props.region!="Gouvernorats" ?
+               el.region==props.region : el.name.includes(props.name)).map((user) => (
+              <Grid item key={user} xs={12} sm={4} md={4} >
+               <Card1 key={user} user={user} />  
 
               </Grid>
             ))}
-
+         
           </Grid>
+          <Pagination
+          count={    Math.ceil(users.length / itemsPerPage)
+          }
+          page={page}
+          onChange={handleChange}
+          defaultPage={1}
+          variant="outlined"
+           color="primary"        
+          showFirstButton
+          showLastButton />
 
-     </div>
-     
+     </>
   );
 }

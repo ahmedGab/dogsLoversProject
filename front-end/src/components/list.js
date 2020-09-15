@@ -8,7 +8,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import Check from '../images/check.png'
-import "./about/about.css"
+import "./home/home.css"
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -38,9 +38,9 @@ export default function AlignItemsList() {
                 className={classes.inline}
                 color="textPrimary"
               >
-                EASY
+                Raison
               </Typography>
-              {" —  Our methods do not require advanced handling skills, expert timing or endless patience"}
+              {" —  Valoriser l’affection incomparable entre un maître et son chien."}
             </React.Fragment>
           }
         />
@@ -58,9 +58,10 @@ export default function AlignItemsList() {
                 className={classes.inline}
                 color="textPrimary"
               >
-                EFFECTIVE
+                EFFICACE
+
               </Typography>
-              {" —  Our methods work, and they work as quickly as possible. We know because we test them constantly, by playing training games!"}
+              {" —  Nos méthodes fonctionnent et elles fonctionnent le plus rapidement possible. On le sait parce qu'on les teste constamment, en jouant à des jeux d'entraînement."}
             </React.Fragment>
           }
         />
@@ -80,7 +81,7 @@ export default function AlignItemsList() {
               >
                 ENJOYABLE 
               </Typography>
-              {' — La formation de chien (comme la plupart des choses dans la vie) devrait être AMUSANTE! Pour nous et votre chien!'}
+              {' — La formation de chien (comme la plupart des choses dans la vie) devrait être AMUSANTE, Pour nous et le chien.'}
             </React.Fragment>
           }
         />

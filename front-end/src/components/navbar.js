@@ -6,13 +6,13 @@ import {logout} from "../actions/user"
 import { connect } from "react-redux";
 import axios from "axios"
 import { CircularProgress } from "@material-ui/core";
-import  "./about/about.css"
+import  "./home/home.css"
 import logo from "../images/logoDL1.png"
 class NavbarPage extends Component {
 state = {
   isOpen: false
   ,data:""
-};
+,a:JSON.parse(localStorage.getItem("userData"))};
 toggleCollapse = () => {
   this.setState({ isOpen: !this.state.isOpen });
 }
@@ -24,6 +24,7 @@ async componentDidMount(){
   })
   const result =await axios.get("http://localhost:4000/dogsLovers/users/profil",{withCredentials:true})
 this.setState({data:result.data})
+
 }
 profil=()=>{
   return window.location.href=`/detailDresseur/${this.state.data._id}`
@@ -33,7 +34,7 @@ profil=()=>{
     }
  logOut=()=>{
  localStorage.removeItem("userData") 
- return window.location.href="/home"
+ return window.location.href="/"
 }
 
 render() {
@@ -57,14 +58,17 @@ render() {
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav left>
-            <MDBNavItem active>
-              <MDBNavLink Link to="/home">A propos</MDBNavLink>
+            <MDBNavItem className={window.location.href === 'http://localhost:3000/' ? 'active' : ''}>
+              <MDBNavLink  to="/">Accueil</MDBNavLink>
             </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to="/listesEducateurs">Educateurs de canins</MDBNavLink>
+            <MDBNavItem className={window.location.href === 'http://localhost:3000/listesEducateurs' ? 'active' : ''}>  
+              <MDBNavLink  to="/listesEducateurs">Educateurs de canins</MDBNavLink>
             </MDBNavItem>
-            <MDBNavItem>
-              <MDBNavLink to="/contact">Contact</MDBNavLink>
+            <MDBNavItem className={window.location.href === 'http://localhost:3000/contact' ? 'active' : ''} >
+              <MDBNavLink  to="/contact">Contact</MDBNavLink>
+            </MDBNavItem>
+            <MDBNavItem className={window.location.href === 'http://localhost:3000/premiuim' ? 'active' : ''} >
+              <MDBNavLink  to="/premiuim">Premiuim</MDBNavLink>
             </MDBNavItem>
             
           </MDBNavbarNav>
@@ -72,23 +76,39 @@ render() {
            
             
             <MDBNavItem>
-{ exist._id==true ?
+{ !exist ?
               <MDBDropdown basic>
                               <MDBBtn outline color="info" size="sm"  href="/login" >Se connecter</MDBBtn>
 
-                         </MDBDropdown>:<MDBDropdown basic>
+                         </MDBDropdown>: 
+                                         <div style={{display:"flex"}} > 
+
+
+<MDBNavLink   to={`/detailDresseur/${exist._id}`}>
+<img src={`http://localhost:4000/${exist.photo}`}  style={{width:"30px",height:"30px",borderRadius:"50%"}} alt=""/> &nbsp;
+ {exist.name +" "+exist.lastname }
+ </MDBNavLink>
+
+                         <MDBDropdown basic>
+
                          <MDBDropdownToggle nav caret>
-                         {exist.name +" "+exist.lastname }
                          </MDBDropdownToggle>
                          <MDBDropdownMenu className="dropdown-default">
-                         <MDBDropdownItem  onClick={this.profil}>Mon profil</MDBDropdownItem>
+                         <MDBDropdownItem  onClick={this.Editprofil}>Mon compte</MDBDropdownItem>
+
                          <MDBDropdownItem  onClick={this.Editprofil}>Modifier mon profil</MDBDropdownItem>
+                         
 
-
+                           
+                           {exist.role=="premiuim" ?
+                           <Link to ={`/cardPremiuim/${exist._id}`}><MDBDropdownItem   >Ajouter des cartes et galerie d'images</MDBDropdownItem>  </Link>
+                           :""
+                           }
                            <MDBDropdownItem  onClick={()=>{this.logOut();this.props.Logout()}}>Se déconnecter</MDBDropdownItem>
-                      
                          </MDBDropdownMenu>
                                        </MDBDropdown>
+                                       </div>
+
 }
             </MDBNavItem>
           </MDBNavbarNav>

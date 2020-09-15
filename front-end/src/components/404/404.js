@@ -12,8 +12,8 @@ const P404 = () => {
         <br />
         <h3>Cette page est introuvable</h3>
         <br />
-        <Button variant="contained" color="primary" href="/home">
-        Retourner      </Button>
+        <Button variant="contained" color="primary" href="/">
+        Page acceuil      </Button>
     </div>
     );
 };

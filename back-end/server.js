@@ -7,6 +7,11 @@ const connectDB = require('./config/db');
 const user=require('./routes/users');
 const auth=require('./routes/auth');
 const logout=require('./routes/logout')
+const reclamation=require('./routes/reclamations');
+const premiuim=require('./routes/premiuim');
+const cardpremiuim=require('./routes/cardPremiuim');
+
+
 const multer = require("multer");
 
 const port =process.env.port ||4000;
@@ -134,6 +139,12 @@ app.post("/video", (req, res) => {
 app.use("/dogsLovers/users",user)
 app.use("/dogsLovers/login",auth)
 app.use("/dogsLovers/logout",logout)
+app.use("/dogsLovers/reclamations",reclamation)
+app.use("/dogsLovers/premiuim",premiuim)
+app.use("/dogsLovers/cardpremiuim",cardpremiuim)
+
+
+
 
 
 

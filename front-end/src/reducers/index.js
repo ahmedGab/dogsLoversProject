@@ -11,6 +11,12 @@ import {LatReducer} from "./lat"
 import {LngReducer} from "./lng"
 import {LocReducer} from "./loc"
 import {lundi,lundipm,mardi,mardipm,mercredi,mercredipm,jeudi,jeudipm,vendredi,vendredipm,samedi,samedipm,dimanche,dimanchepm} from "./workingHours"
+import {RepReducer} from "./reponseRéclamation"
+import {RecsReducer} from "./reclamations"
+import {countPremiuimReducer} from "./Countspremuim"
+import {cardsPremiuimReducer} from "./cardsPremiuim"
+
+
 
 
 
@@ -41,7 +47,10 @@ const allReducers = combineReducers({
     samedipm:samedipm,
     dimanche:dimanche,
     dimanchepm:dimanchepm,
-
+    reponse:RepReducer,
+    recs:RecsReducer,
+    countPrem:countPremiuimReducer,
+    cardsPrem:cardsPremiuimReducer
 
 
 

@@ -25,19 +25,19 @@ export const mainListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-   <Link to="/users"><ListItemText primary="Utilisateurs" /></Link>   
+   <Link to="/admin/users"><ListItemText primary="Utilisateurs" /></Link>   
     </ListItem>
     <ListItem button>
       <ListItemIcon>
 <MonetizationOnTwoToneIcon />
       </ListItemIcon>
-      <Link to="/premiuim">  <ListItemText primary="Compte premiuim" /> </Link>
+      <Link to="/admin/premiuim">  <ListItemText primary="Compte premiuim" /> </Link>
     </ListItem>
     <ListItem button>
       <ListItemIcon>
         <EmailTwoToneIcon />
       </ListItemIcon>
-      <Link to="/claim"> <ListItemText primary="Réclamations" />
+      <Link to="/admin/claim"> <ListItemText primary="Réclamations" />
   </Link>  </ListItem>
   
   </div>

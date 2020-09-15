@@ -16,13 +16,17 @@ img.card-img-top{
 img.card-img-bottom{
 	position: relative;
 	max-width: 20%;
-	left:45px;
+	left:0;
 	bottom: -50px;
 	height: auto;
 }
-
+.cardsDresseurs{
+	background-color: #f7f7f7;
+	padding: 30px 0 50px 0;
+}
 .cardsDresseurs .MuiCard-root{
-width: 380px;
+	margin-left: 07px;
+max-width: 345px;
 }
 
 .cardsDresseurs .MuiCard-root:hover{

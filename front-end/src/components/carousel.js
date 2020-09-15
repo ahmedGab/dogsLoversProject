@@ -1,4 +1,6 @@
-import React from 'react';
+import React ,{useEffect, useState}from 'react';
+import {useSelector,useDispatch} from 'react-redux'
+
 import Carousel from 'react-material-ui-carousel'
 import {Paper} from '@material-ui/core'
 import Button from '@material-ui/core/Button';
@@ -7,30 +9,31 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Logo from "../images/thebest.png"
 import "./carousel.css"
+import {getUsers} from "../actions/user"
+import { Link } from 'react-router-dom';
+
 
 
  
  
 export default  function Example(props)
 {
+    const dispatch = useDispatch()
+const users = useSelector(state => state.users)
 
-    var items = [
-       
-        {
-            name: "Random Name #1",
-            description: "https://i2.wp.com/metro.co.uk/wp-content/uploads/2019/03/SEC_59085628.jpg?quality=90&strip=all&zoom=1&resize=644%2C338&ssl=1"
-        },
-        {
-            name: "Random Name #2",
-            description: "https://i1.wp.com/metro.co.uk/wp-content/uploads/2019/08/PRC_81848847.jpg?quality=90&strip=all&zoom=1&resize=644%2C338&ssl=1"
-        }
-    ]
+    useEffect( () => {
+        dispatch(getUsers())
+        },[]);
+
+
+    
  
     return (
         <Carousel>
         
             {
-                items.map( (item, i) => <Item key={i} item={item} /> )
+                             users? users.filter(el=>el.role=="premiuim").map( (item, i) => <Item key={i} item={item} /> ):""
+                             
             }
         </Carousel>
     )
@@ -40,13 +43,15 @@ function Item(props)
 
     return (
         <Paper>
+            
 
-            <h2>{props.item.name}</h2>
-            <img src={props.item.description} alt=""/>
- 
+            <h2>{props.item.ecole}</h2>
+            <img src={`http://localhost:4000/${props.item.photo}`} alt=""/>
+            <Link to={`/detailDresseur/${props.item._id}`}> 
             <Button variant="outlined" fullWidth className="CheckButton">
-               <strong> Check it out! </strong>
-            </Button>
+             <strong> Découvrir !</strong></Button>
+             </Link> 
+            
         </Paper>
     )
 }
