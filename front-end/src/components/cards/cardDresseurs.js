@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import {getUsers} from "../../actions/user"
+
 import Pagination from '@material-ui/lab/Pagination';
 
 
@@ -71,7 +72,6 @@ export default function CardDresseur(props) {
    
   
   },[]);
-  console.log(users)
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -84,17 +84,17 @@ export default function CardDresseur(props) {
 
           <Grid container  className="cardsDresseurs" spacing={10} >
 
-            {props.name !="" ?users.slice((page - 1) * itemsPerPage, page * itemsPerPage).filter(el=>props.region!="Gouvernorats" ?
-             el.region==props.region && el.name.includes(props.name)
-             : el.name.includes(props.name))
+            {props.name !=""  ?users.slice((page - 1) * itemsPerPage, page * itemsPerPage).filter(el=>el.role=="dresseur" || el.role=="premiuim").filter(el=>props.region!="Gouvernorats"  ?
+             el.region==props.region && el.ecole.includes(props.name)
+             : el.ecole.includes(props.name))
              .map((user) => (
               <Grid item key={user} xs={12} sm={4} md={4} >
                <Card1 key={user} user={user} />  
 
               </Grid>)):
-              users.slice((page - 1) * itemsPerPage, page * itemsPerPage).
+              users.slice((page - 1) * itemsPerPage, page * itemsPerPage).filter(el=>el.role=="dresseur" || el.role=="premiuim").
               filter(el=>props.region!="Gouvernorats" ?
-               el.region==props.region : el.name.includes(props.name)).map((user) => (
+               el.region==props.region : el.ecole.includes(props.name)).map((user) => (
               <Grid item key={user} xs={12} sm={4} md={4} >
                <Card1 key={user} user={user} />  
 

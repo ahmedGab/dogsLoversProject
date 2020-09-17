@@ -40,7 +40,7 @@ export default function TableItems(props) {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
+            <TableCell>Date fin d'abonnement</TableCell>
             <TableCell>Nom </TableCell>
             <TableCell>Prénom</TableCell>
             <TableCell>Email</TableCell>
@@ -57,14 +57,14 @@ export default function TableItems(props) {
           
           {countPrem ?countPrem.map((prem) => (
             <TableRow key={prem._id}>
-              <TableCell>{prem.date}</TableCell>
+              <TableCell style={{fontWeight:500}}>{prem.date}</TableCell>
               <TableCell>{prem.name}</TableCell>
               <TableCell>{prem.lastname}</TableCell>
-              <TableCell>{prem.email}</TableCell>
+              <TableCell>{prem.email}</TableCell>             
               <TableCell>{prem.tel}</TableCell>
               <TableCell>{prem.role}</TableCell>
               <TableCell>{prem.state}</TableCell>
-              <TableCell align="right"><DoneOutlineIcon onClick={()=>dispatch(UpdateCountPemiuim(prem._id,prem.idUser,prem.date,prem.name,prem.lastname,prem.email,prem.tel,prem.password,"premiuim","confirmé"))} style={{color: "blue",cursor:"pointer"}} /></TableCell>
+              <TableCell align="right"><DoneOutlineIcon onClick={()=>dispatch(UpdateCountPemiuim(prem._id,prem.idUser,new Date(Date.now() + (30 * 24 * 60 * 60 * 1000)),prem.name,prem.lastname,prem.email,prem.tel,prem.password,"premiuim","confirmé"))} style={{color: "blue",cursor:"pointer"}} /></TableCell>
 
                <TableCell align="right"><DeleteIcon onClick={()=>dispatch(deleteCount(prem._id))} style={{color: "red",cursor:"pointer"}} /></TableCell>
            

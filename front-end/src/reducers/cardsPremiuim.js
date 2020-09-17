@@ -7,5 +7,6 @@ if(action.type===GET_CARDS){
     return action.payload
 }
 
+
 else return state
 }

@@ -61,7 +61,7 @@ function Alert(props) {
 }
 const Dresseur=()=>{
         const classes = useStyles();
-
+       
 
     const [data, setData] = useState("");
     const [active] = useState("false");
@@ -71,7 +71,14 @@ const Dresseur=()=>{
         if(result.data!=="error" && result.data.lat){
           localStorage.setItem("userData",JSON.stringify(result.data))
           }
-         
+         if(result.data.role=="admin"){
+          localStorage.setItem("admin",JSON.stringify(result.data))
+
+         }
+         if(result.data.role=="visiteur"){
+          localStorage.setItem("visiteur",JSON.stringify(result.data))
+
+         }
         setData(result.data);
        }  
     useEffect( () => {
@@ -79,6 +86,7 @@ const Dresseur=()=>{
         getData()
   
  },[]);
+ console.log(data)
 return (
   <div>
   {data  ?

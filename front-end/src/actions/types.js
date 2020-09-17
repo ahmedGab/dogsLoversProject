@@ -28,6 +28,8 @@ export const GET_RECS="GET_RECS"
 export const GET_PREM="GET_PREM"
 export const ADD_PREM="ADD_PREM"
 export const GET_CARDS="GET_CARDS"
+export const GET_CARD="GET_CARD"
+
 
 
 

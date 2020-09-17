@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 
-import axios from "axios"
+import Grid from '@material-ui/core/Grid';
 import Navbar from "../navbar"
 import Footer from "../footer/footer"
 import MuiAlert from '@material-ui/lab/Alert';
@@ -16,10 +16,15 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
 
 import CardDresseurs from "../cards/cardDresseurs"
-import { Link } from 'react-router-dom';
 import Spinner from "../spinner/spinner"
 import CardsPremuim from "../cards/cardPremiuim"
 import {getUser} from '../../actions/user.js'
+import { useParams } from 'react-router-dom';
+import dog1 from "../../images/dog1.png"
+import dog2 from "../../images/dog2.png"
+import dog3 from "../../images/dog3.png"
+
+
 
 
 // import './about.css'
@@ -91,25 +96,43 @@ const useStyles = makeStyles((theme) => ({
 
 const Dresseur=(props)=>{
         const classes = useStyles();
+        const location = useParams();
+        
 
 
     const [data, setData] = useState("");
-    const [region, setRegion] = useState("Gouvernorats");
     const [name,setName]=useState("")
     const [Offset,setOffset]=useState(0)
     const [perPage,setPerPage]=useState(1)
     const [currentPage,setCurrentPage]=useState(0)
+  
+    const premiuim=[
+      {
+        logo:dog1,
+        title:"Améliore considérablement l'obéissance de votre chien" 
+    },
+    {
+      logo:dog2
+      ,title:"Élimine les comportements gênants comme les aboiements, la mastication ou l'agression"
+     
+         }
+         ,{
+      logo:dog3
+      ,title:"Demandez à votre chien de s'asseoir, de s'allonger, de rester, de se pencher, de se laisser tomber et de marcher à vos côtés sans effort"
+      
+    },
 
+  
+    ]
 
 
 const dispatch = useDispatch()
     const user = useSelector(state => state.user);
 
     useEffect( () => {
-       dispatch(getUser(props.match.params.id))
-  
+       dispatch(getUser(location.id))
  },[]);
-
+console.log(data)
 
  return (
   <div>
@@ -122,12 +145,26 @@ height:'500px'
 }}><Navbar />
 </div>
 
+<div style={{marginTop:"30px",textAlign:"center",color:"white",padding:"50px 0" }}>
+            <Grid   container spacing={2} sm>
+   
+  {premiuim.map(el =>  
+   <Grid  sm={4} xs={12}  >
+     <img style={{width:'160px',height:'160px'}} src={el.logo}/>
+     <h6 style={{fontWeight:300 ,color:"black",padding:"10px 20px 0 70px"}} >{el.title}</h6>
+   
+     </Grid> 
+     )}
+
+            </Grid></div>
+            <div style={{backgroundColor:"rgb(1, 58, 97)",width:"100vw",padding:"50px 0"}}>
+<h3 style={{fontWeight:'700' ,margin:"30px 0",padding:"0 7px",textAlign:'center',color:'white'}}>
+Les  méthodes d'entraînement et d'éducation de chiens chez<span style={{color:"rgb(0, 173, 216)",fontWeight:'800',fontSize:"35px"}}> '{user.ecole}'</span> </h3>
+</div>
 <Container className={classes.cardGrid} >
-<h3 style={{fontWeight:'400' ,margin:"30px 0",padding:"0 7px",textAlign:'center',color:'black'}}>
-Les  méthodes d'entraînement et d'éducation de chiens chez<span style={{color:"rgb(74, 144, 226)",fontWeight:'800'}}> {user.ecole} </span> </h3>
 
      
-        <CardsPremuim />
+        <CardsPremuim ecole={user.ecole} />
         
 
         </Container>

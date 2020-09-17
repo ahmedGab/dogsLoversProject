@@ -15,6 +15,16 @@ router.get('/' ,async (req,res)=>{
         })
 
 
+router.get('/:id' ,async (req,res)=>{
+  let card=await CardPremiuim.findById(req.params.id)
+    
+              res.json(card)
+             
+  
+         
+      })
+
+
 
 
 router.post('/' ,async (req,res)=>{
@@ -46,17 +56,41 @@ router.put('/:id',async(req,res)=>{
             card = await CardPremiuim.findByIdAndUpdate(req.params.id, req.body, {
               new: true
             });
-            res.send(card)
+            res.send("ok")
           } catch (error) {
             res.send("error");
           }
         
     
     })
+    router.put('/:id',async(req,res)=>{
+
+
+      try {
+          //const joiError=schema.validate(req.body)
+        
+      
+              let card = await CardPremiuim.findById(req.params.id);
+              if (!card)
+                return res.send("no user");
+  
+  
+              card = await CardPremiuim.findByIdAndUpdate(req.params.id, req.body, {
+                new: true
+              });
+              res.send("ok")
+            } catch (error) {
+              res.send("error");
+            }
+          
+      
+      })
+  
+  
 
 
 router.delete('/:id' ,async(req,res)=>{
-    let deletedCount=await Premiuim.findByIdAndRemove(req.params.id)
+    let deletedCount=await CardPremiuim.findByIdAndRemove(req.params.id)
       
             res.send(deletedCount)
        

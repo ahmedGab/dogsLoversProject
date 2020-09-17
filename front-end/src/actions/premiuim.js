@@ -25,13 +25,13 @@ export function AddComptePremiuim(idUser,date,name,lastname,email,tel,password,r
 
     })
 
-       : rep.data.role=="premiuim"? alert("Vous étes abonné"):alert("problem") }).catch(err=>console.log(err)) 
+       : rep.data.role=="premiuim"? console.log("Vous étes abonné"):console.log("problem") }).catch(err=>console.log(err)) 
 
 }
 export function UpdateCountPemiuim(id,idUser,date,name,lastname,email,tel,password,role,state){
     return (dispatch)=>
     
-     axios.put(`http://localhost:4000/dogsLovers/premiuim/${id}`,{role,state},{withCredentials:true}).then(rep=>{
+     axios.put(`http://localhost:4000/dogsLovers/premiuim/${id}`,{date,role,state},{withCredentials:true}).then(rep=>{
          if(rep.data.role=="premiuim"){
             axios.put(`http://localhost:4000/dogsLovers/users/${idUser}`,{role:rep.data.role},{withCredentials:true}).then(rep=>{
                 localStorage.setItem("userData",JSON.stringify(rep.data))

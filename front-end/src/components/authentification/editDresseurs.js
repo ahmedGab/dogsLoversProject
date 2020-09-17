@@ -186,7 +186,7 @@ getData()
 
 },[]);
 
-
+console.log(region)
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -205,12 +205,12 @@ else if(typeof name!== "undefined" ){
      setErrorName("le nom doit étre des caractéres")
      formValid=false;
  }
- else if(/^[a-z,A-z]{3,40}/g.test(name)===false){
+ else if(/^[a-z,A-zéüöêåø]{3,40}/g.test(name)===false){
   setErrorName("le nom doit étre minimum 3 caractéres")
   formValid=false;
 }
 }
- if(/^[a-z,A-z]{3,40}/g.test(name)){
+ if(/^[a-z,A-zéüöêåø]{3,40}/g.test(name)){
      setErrorName("")
  }
  if(lastName===""){
@@ -218,17 +218,17 @@ else if(typeof name!== "undefined" ){
   formValid=false;
 }
 else if(typeof lastName!== "undefined" ){
- if(/^[a-z,A-z]/g.test(name)===false){
+ if(/^[a-z,A-zéüöêåø]/g.test(name)===false){
      setErrorLastname("le nom doit étre des caractéres")
      formValid=false;
  }
- else if(/^[a-z,A-z]{3,40}/g.test(name)===false){
+ else if(/^[a-z,A-zéüöêåø]{3,40}/g.test(name)===false){
   setErrorLastname("le nom doit étre minimum 3 caractéres")
   formValid=false;
 }
 
 }
- if(/^[a-z,A-z]{3,40}/g.test(lastName)){
+ if(/^[a-z,A-zéüöêåø]{3,40}/g.test(lastName)){
      setErrorLastname("")
  }
  if(email===""){
@@ -265,12 +265,12 @@ if(/^[0-9]{8}/g.test(tel)){
   formValid=false;
 }
 else if(typeof region!== "undefined" ){
- if(/^[a-z,A-Z]{3,11}/gi.test(region)===false){
+ if(/^[a-z,A-Zéüöêåø]{3,11}/gi.test(region)===false){
      setErrorLoc("Choisir un gouvernorat existante ")
      formValid=false;
  }
 }
-if(/^[a-z]{3,11}/gi.test(region)){
+if(/^[a-zéüöêåø]{3,11}/gi.test(region)){
   setErrorLoc("")
 }
 
@@ -324,7 +324,7 @@ if(desc==="" ||desc===undefined ){
   setErrorDesc("Ecrire une description concernat votre établissement  ")
   formValid=false;
 }
-else if(typeof desc!== "undefined"  ){
+else if(typeof desc!== "undefined"|| desc===""  ){
  if(/^.{3,}/gi.test(desc)===false){
      setErrorDesc("Ecrire une description a propos vous ou votre école ")
      formValid=false;
@@ -400,10 +400,10 @@ function editDresseurs(){
 
 }
 
-
+console.log(data.role)
   return (
     <div>
-      {data._id ?
+      {data.role=="dresseur" || data.role=="premiuim"   ?
     <Grid container component="main" className={classes.root}>
      
       <CssBaseline />

@@ -12,8 +12,10 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import{GetCardsPremiuim} from "../../actions/cardPremiuim"
 import Spinner from "../spinner/spinner"
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
+import PageCardPremiuim from "../premiuim/PageCardPremuim"
+import Editcard from "../premiuim/editcardPremiuim"
 
 
 
@@ -31,7 +33,7 @@ export default function ImgMediaCard(props) {
 useEffect(() => {
    dispatch(GetCardsPremiuim())
 },[])
-
+const user=JSON.parse(localStorage.getItem("userData"))
 
   return (
     <Grid container  className="cardsDresseurs" spacing={10} >
@@ -42,6 +44,7 @@ useEffect(() => {
                 <Card className={classes.root} style={{	marginLeft: '07px',
 maxWidth: '345px',height:'450px',fontWeight:400}}>
       <CardActionArea>
+        
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
@@ -50,6 +53,8 @@ maxWidth: '345px',height:'450px',fontWeight:400}}>
           title="Contemplative Reptile"
         />
         <CardContent>
+        
+
             <div style={{background:"white",width:"100px",height:"40px",border:"2px solid rgb(74, 144, 226)",textShadow:"rgba(0, 0, 0, 0) 0px 0px 1px",position:"absolute" ,top:"160px",left:"34%"}} > 
             <h6 style={{textAlign:"center",paddingTop:"7px",fontSize:'16px',fontWeight:500}}>{card.prix} DT</h6></div>
           <Typography style={{padding:'30px 0 0 0', fontSize:'28px',height:'100px'}} gutterBottom  align="center">
@@ -68,14 +73,18 @@ maxWidth: '345px',height:'450px',fontWeight:400}}>
       <Typography style={{paddingTop:'10px',fontSize:'16px',color:'black'}}  >
     {card.time}
 
+
     </Typography>
     </div>
-
+    <div > <PageCardPremiuim card={card} ecole={props.ecole}/></div>
+       
 
       </CardActionArea>
-     
+
       
-    </Card>  </Grid>):<Spinner/>}
+    </Card> {user && user.role=="premiuim" && user._id==location.id ?  <Editcard card={card}/> :"" }  </Grid>):<Spinner/>}
     </Grid>
   );
 }
+
+// {user.role=="premiuim" && user._id==location.id ?  <div style={{textAlign:"center",paddingTop:"10px"}}>  <Button  variant="contained"  onClick={(e) => { e.preventDefault(); window.location.href=`/cardPremiuim/${card._id}`; }}   color="primary">Changer le contenu de cettre carte</Button></div> :"" } 

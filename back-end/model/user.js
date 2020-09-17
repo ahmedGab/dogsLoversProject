@@ -22,7 +22,7 @@ const Users = new mongoose.Schema({
    role:{
     type:String,
 required:true,
-enum:['visiteur','dresseur']   
+enum:['visiteur','dresseur','admin']   
 },
 tel:{
     type:String

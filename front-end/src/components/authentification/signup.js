@@ -161,16 +161,16 @@ if(data=="error"){
       formValid=false;
   }
   else if(typeof name!== "undefined" ){
-     if(/^[a-z,A-z]/g.test(name)===false){
+     if(/^[a-z,A-zéüöêåø]/g.test(name)===false){
          setErrorName("le nom doit étre des caractéres")
          formValid=false;
      }
-     else if(/^[a-z,A-z]{3,40}/g.test(name)===false){
+     else if(/^[a-z,A-zéüöêåø]{3,40}/g.test(name)===false){
       setErrorName("le nom doit étre minimum 3 caractéres")
       formValid=false;
     }
   }
-     if( name!=undefined && /^[a-z,A-z]{3,40}/g.test(name) ){
+     if( name!=undefined && /^[a-z,A-zéüöêåø]{3,40}/g.test(name) ){
          setErrorName("")
      }
      if(typeof lastName==="undefined" ||lastName===""){
@@ -178,17 +178,17 @@ if(data=="error"){
       formValid=false;
   }
   else if(typeof lastName!== "undefined" ){
-     if(/^[a-z,A-z]/g.test(lastName)===false){
+     if(/^[a-z,A-zéüöêåø]/g.test(lastName)===false){
          setErrorLastname("le nom doit étre des caractéres")
          formValid=false;
      }
-     else if(  /^[a-z,A-z]{3,40}/g.test(lastName)===false){
+     else if(  /^[a-z,A-zéüöêåø]{3,40}/g.test(lastName)===false){
       setErrorLastname("le nom doit étre minimum 3 caractéres")
       formValid=false;
   }
   
     }
-     if( lastName!=undefined &&/^[a-z,A-z]{3,40}/g.test(lastName)){
+     if( lastName!=undefined &&/^[a-z,A-zéüöêåø]{3,40}/g.test(lastName)){
          setErrorLastname("")
      }
      if(typeof email==="undefined"||email===""){
@@ -369,18 +369,20 @@ Inscrivez-vous
             </Grid>
             <Grid item xs={12}>
             <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel htmlFor="outlined-age-native-simple">Type de dressage *</InputLabel>
+        <InputLabel htmlFor="outlined-age-native-simple"></InputLabel>
         <Select
           native
           value={role}
           onChange={e => setRole(e.target.value)}
-          label="Type de dressage "
+          label="Vous étes ? "
          
         
         >
-          <option aria-label="None" value="" />
-          <option value="visiteur">Visiteur</option>
+          <option aria-label="None" value="" disabled selected> Vous étes ?* </option>
           <option value="dresseur">Dresseur</option>
+          <option value="visiteur">Propriétaire</option>
+          <option value="visiteur">Autre</option>
+
          
         </Select>
         

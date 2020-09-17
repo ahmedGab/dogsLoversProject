@@ -10,11 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import PetsIcon from '@material-ui/icons/Pets';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import {AddUsers} from "../../actions/user"
+
 import {Auth} from "../../actions/user"
 import {AddDresseurs} from "../../actions/user"
 import {getPhoto} from "../../actions/upload"
@@ -190,7 +186,7 @@ console.log(data._id)
 
   return (
     <div>
-       { data=="error"?
+       { data=="error" || data.role=="dresseur" && !data.photo?
     <Grid container component="main" className={classes.root}>
      
       <CssBaseline />

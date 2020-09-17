@@ -15,6 +15,8 @@ import {RepReducer} from "./reponseRéclamation"
 import {RecsReducer} from "./reclamations"
 import {countPremiuimReducer} from "./Countspremuim"
 import {cardsPremiuimReducer} from "./cardsPremiuim"
+import {cardPremReducer} from "./cardprem"
+
 
 
 
@@ -50,7 +52,10 @@ const allReducers = combineReducers({
     reponse:RepReducer,
     recs:RecsReducer,
     countPrem:countPremiuimReducer,
-    cardsPrem:cardsPremiuimReducer
+    cardsPrem:cardsPremiuimReducer,
+    cardPrem:cardPremReducer,
+
+    
 
 
 

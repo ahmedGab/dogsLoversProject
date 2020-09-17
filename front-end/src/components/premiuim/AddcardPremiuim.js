@@ -23,22 +23,16 @@ import {getPhoto} from "../../actions/upload"
 
 import img1 from "../../images/doglove.png"
 import UploadPhoto from "../upload/uploadPhoto"
-import UploadVideo from "../upload/uploadVideo"
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import Snackbar from '@material-ui/core/Snackbar';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import MuiAlert from '@material-ui/lab/Alert';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import Table from '../tabletimeWorking'
-import Map1 from '../map/map1'
+
 import axios from "axios"
 import Select1 from "../select/select"
 import P404 from "../404/404"
 import {AddCardPremiuim} from "../../actions/cardPremiuim"
+import {GetCardPremiuim} from "../../actions/cardPremiuim"
+import {UpdateCardPemiuim} from "../../actions/cardPremiuim"
+import { useParams } from 'react-router-dom';
+
+
 
 
 
@@ -79,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },error:{
     color:'#8d0000',
-    fontSize:'13px'
+    fontSize:'13px',
   },
   
 }));
@@ -97,23 +91,22 @@ export default function SignInSide() {
 
 
 const [time,setTime]=useState("");
+const location = useParams();
 
-  const pic = useSelector(state => state.photo)
- const dispatch = useDispatch()
+
+const pic = useSelector(state => state.photo)
   
+const dispatch = useDispatch()
 
 
- 
 
 
-useEffect( () => {
 
-
-},[]);
- 
- 
-  let user=JSON.parse(localStorage.getItem("userData"))
-  const uploadPhoto=()=>{
+ const handleChange = (e) => {
+   setTitle(e.target.value)
+ }
+ let user=JSON.parse(localStorage.getItem("userData"))
+ const uploadPhoto=()=>{
 
 
     const formData = new FormData()
@@ -126,41 +119,42 @@ useEffect( () => {
    }
    function validation(){
     let formValid=true;
-    if( title===""){
+    if( title==="" || typeof title=="undefined"){
       setErrorTitle("Nom obligatoire. ")
       formValid=false;
   }
-  else if(typeof title!== "" ){
-     if(/^[a-z,A-z]/g.test(title)===false){
+  else if(typeof title!== "undefined"  && title !==""){
+     if(/^[a-zA-Zéüöêåø\s]/g.test(title)===false){
          setErrorTitle("Le titre doit étre des caractéres")
          formValid=false;
      }
-     else if(/^[a-z,A-z]{3,40}/g.test(title)===false){
+     else if(/^[a-zA-Zéüöêåø\s]{3,40}/g.test(title)===false){
       setErrorTitle("Le titre doit étre minimum 3 caractéres")
       formValid=false;
     }
   }
-     if(  /^[a-z,A-z]{3,40}/g.test(title) ){
+     if( typeof title != "undefined" &&  /^[a-zA-Zéüöêåø\s]{3,40}/g.test(title) ){
          setErrorTitle("")
      }
-     if(subtitle===""){
+     if(subtitle==="" || typeof subtitle=="undefined"){
       setErrorSubtitle("La description générale obligatoire. ")
       formValid=false;
   }
-  else if(typeof subtitle!== "" ){
-     if(/^[a-z,A-z]/g.test(subtitle)===false){
+  else if(typeof subtitle!== "undefined"  && typeof subtitle!== "" ){
+     if(/^[a-zA-Z\s]/g.test(subtitle)===false){
         setErrorSubtitle("La description générale doit étre des caractéres")
          formValid=false;
      }
-     else if(  /^[a-z,A-z]{3,40}/g.test(subtitle)===false){
+     else if(  typeof subtitle != "undefined" &&  /^[a-zA-Zéüöêåø\s]{3,40}/g.test(subtitle)===false){
         setErrorSubtitle("La description générale doit étre minimum 3 caractéres")
       formValid=false;
   }
   
     }
-     if( /^[a-z,A-z]{3,40}/g.test(subtitle)){
-        setErrorSubtitle("")
-     }
+    if( typeof subtitle!= "undefined" &&  /^[a-zA-Zéüöêåø\s]{3,40}/g.test(subtitle) ){
+      setErrorSubtitle("")
+  }
+     
      
      if( pic==user.photo){
       setErrorPic(" choisissez une image")
@@ -180,35 +174,39 @@ useEffect( () => {
 
 
 function addcard(){
-    if(validation())
+    if( validation() ){
+      if(uploadPhoto()){
     dispatch(AddCardPremiuim(title,subtitle,pic.name,time,price,desc,user._id))
+}
+else         dispatch(AddCardPremiuim(title,subtitle,pic.name,time,price,desc,user._id))
+
 
 }
-
-  
-  console.log(pic)
-
-  
+}
 
 
+
+
+console.log(title)
   return (
     <div>
        { user.role=="premiuim"?
     <Grid container component="main" className={classes.root}>
      
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={5} className={classes.image} />
+      <Grid item xs={false} sm={4} md={4} className={classes.image} />
 
-      <Grid item xs={12} sm={8} md={7} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={8} md={8} component={Paper} elevation={6} square>
     
    
    <div className={classes.paper}>
      <Typography component="h1" variant="h5">
-       Ajouter une carte 
+     Entrez vos données concernant votre méthode de dressage
      </Typography>
      <form className={classes.form} noValidate onSubmit={(e)=>{uploadPhoto(e);addcard(e)}}>
      <Grid container spacing={2}>
-
+     <Grid  item xs={12} md={12} >
+  
        <TextField
          variant="outlined"
          margin="normal"
@@ -219,23 +217,33 @@ function addcard(){
          name="title"
          autoComplete="title"
          autoFocus
-         onChange={e=>setTitle(e.target.value)}
 
-       />
+         onChange={handleChange}
+
+
+
+      /> 
        <h6 className={classes.error}>{Errortitle}</h6>
+       </Grid>
+       <Grid  item xs={12} md={12} >
+
        <TextField
          variant="outlined"
          margin="normal"
          required
          fullWidth
          name="subtitle"
-         label="Description général"
+         label="Sous-titre"
          type="text"
          id="subtitle"
          autoComplete="current-password"
+
          onChange={e=>setSubtitle(e.target.value)}
        />
-<Grid  item xs={12} md={4} >
+              <h6 className={classes.error}>{Errorsubtitle}</h6>
+              </Grid>
+
+<Grid  item xs={12} md={3} >
 <TextField
          variant="outlined"
          margin="normal"
@@ -245,10 +253,9 @@ function addcard(){
          label="prix"
          type="text"
          id="prix"
-         autoComplete="current-password"
+
          onChange={e=>setPrice(e.target.value)}
        /> 
-       <h6 className={classes.error}>{Errorsubtitle}</h6>
 
        </Grid>
        <Grid  item xs={12} md={4} >
@@ -261,12 +268,12 @@ function addcard(){
          label="Durée de serie"
          type="text"
          id="time"
-         autoComplete="current-password"
+
          onChange={e=>setTime(e.target.value)}
        /> 
 
        </Grid>
-       <Grid item xs={12} md={4}>
+       <Grid item xs={12} md={5}>
 <UploadPhoto />
 <h6 className={classes.error}>{errorPic}</h6>
 </Grid>
@@ -275,24 +282,26 @@ function addcard(){
 <TextField
 style={{width:"100%"}}        
  id="standard-multiline-static"
-          label="Message"
+          label="Description du méthode"
           multiline
           rows={6}
+
           onChange={e=>setDesc(e.target.value)}
 
         />
 
-
-
-       <Button
+  <Button
      fullWidth
          variant="contained"
          color="primary"
          className={classes.submit}
-         onClick={(e)=>{uploadPhoto(e);addcard(e)}}
+         onClick={addcard}
        >
          Ajouter
-       </Button>
+       </Button> 
+
+
+
        
       </Grid>
      </form>

@@ -17,10 +17,13 @@ const useStyles = makeStyles({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 14,
+    fontSize: '20px',
+    fontWeight:400
   },
   pos: {
     marginBottom: 12,
+    fontSize: '20px',
+    fontWeight:400
   },
 });
 
@@ -30,17 +33,17 @@ export default function SimpleCard() {
 
   return (
     <Card className={classes.root}>
-      <img  className="card-img-top"  src="https://www.vetorino.com/img/profile/veterinaire-vetorino-2.jpg" alt=""/>
+      <img  className="card-img-top"  src="https://i.axs.com/2017/12/cesar-millan_12-11-17_7_5a2eb4a30990c.jpg" alt=""/>
       <CardContent>
         <Typography className={classes.title}  gutterBottom>
-          Word of the Day
+          Cesar Millan
         </Typography>
        
         <Typography className={classes.pos} >
-          adjective
-        </Typography>
+        National Geographic
+                </Typography>
         <Typography variant="body2" component="p" style={{fontWeight:'300'}}>
-          <strong>“Les chiens d'aujourd'hui souffrent d'un manque de stimulation mentale</strong> et de temps de qualité passé avec'leur peuple'. L'ennui et l'anxiété qui en résultent peuvent conduire à des problèmes physiques et comportementaux sans fin. Le Brain Training for Dogs est la solution! De manière claire et concise, Adrienne Farricelli guide les propriétaires à travers une série d'énigmes et d'exercices qui mettront au défi et divertiront les chiens de tous niveaux.”
+        <strong> “Le dressage ou apprentissage du chien </strong> s’appuie sur différentes techniques qui ont évolué avec le temps et qui tiennent compte des besoins du chien et des objectifs de l’apprentissage. <strong>Le dressage du chiot est important car il est souvent synonyme de sécurité.</strong>Les chiens d'aujourd'hui souffrent d'un manque de stimulation mental et de temps de qualité passé avec'leur peuple'. L'ennui et l'anxiété qui en résultent peuvent conduire à des problèmes physiques et comportementaux sans fin.<strong>"</strong>
           <br />
         </Typography>
       </CardContent>

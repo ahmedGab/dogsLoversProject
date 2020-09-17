@@ -19,12 +19,16 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {getUser} from "../../actions/user"
 import { Link } from 'react-router-dom';
+import PhoneIcon from '@material-ui/icons/Phone';
+import RoomIcon from '@material-ui/icons/Room';
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiPeople';
 
 import "./card.css"
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: '345px',
+height:'400px'
   },
   media: {
     height: 0,
@@ -56,14 +60,13 @@ const dispatch = useDispatch()
   };
 
   return (
-     <Card className={classes.root}>
+     <Card className={classes.root} style={{textAlign:"center"}}>
          
          <CardHeader
    
          
            title={user.ecole}
    
-           subheader={user.region}
          />
          <CardMedia
            className={classes.media}
@@ -72,12 +75,16 @@ const dispatch = useDispatch()
          />
          <CardContent>
            <Typography variant="body2" color="textSecondary" component="p">
-             This impressive paella is a perfect party dish and a fun meal to cook together with your
-             guests. Add 1 cup of frozen peas along with the mussels, if you like.
+           <div style={{display:"flex",justifyContent:"space-between",fontWeight:"500",height:"60px"}}>
+
+          <h6> <PhoneIcon/>{user.tel} </h6>
+          <h6> <RoomIcon/>{user.region} </h6>
+          <h6><EmojiEmotionsIcon/>{user.name} {user.lastname}</h6>
+           </div>
            </Typography>
          </CardContent>
          <CardActions>
-       <Link to={{pathname:`/detailDresseur/${id}`}}> <Button    style={{backgroundColor:"#45676f",color:"white"}} >Plus de détails
+       <Link to={{pathname:`/detailDresseur/${id}`}}> <Button    style={{backgroundColor:"#45676f",color:"white",marginBottom:''}} >Plus de détails
    </Button></Link> 
          </CardActions>
        </Card>

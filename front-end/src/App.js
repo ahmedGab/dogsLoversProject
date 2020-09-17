@@ -13,8 +13,9 @@ import contact from './components/contact/contact'
 import Dashboard from './components/dashboard/Dashboard'
 import Dresseurs from './components/listDresseurs/dresseurs'
 import EditDresseurs from './components/authentification/editDresseurs'
-import TableCountsPremiuim from './components/dashboard/tableCountPremiuims'
 import CardPremiuim from './components/premiuim/AddcardPremiuim'
+import EditCardPremiuim from './components/premiuim/editcardPremiuim'
+
 import PageCardPremiuim from './components/premiuim/PageCardsPremuim'
 
 
@@ -31,7 +32,7 @@ function App() {
 
       <Route exact path= "/register"  component={SignUp}/>
       <Route exact path= "/login"  component={SignIn}/>
-      <Route exact path= "/registerDresseur"  component={EditDresseurs}/>
+      <Route exact path= "/registerDresseur/:id"  component={EditDresseurs}/>
 
 
       <Route exact path= "/detailDresseur/:id"  component={ProfilDresseur}/>
@@ -41,6 +42,8 @@ function App() {
       <Route exact path= "/(admin|admin/users|admin/premiuim|admin/claim)/"  component={Dashboard}/>
       <Route exact path= "/cardPremiuim/:id"  component={CardPremiuim}/>
       <Route exact path= "/PagecardsPremiuim/:id"  component={PageCardPremiuim}/>
+      <Route exact path= "/updatecardpremiuim/:id"  component={PageCardPremiuim}/>
+
 
 
   

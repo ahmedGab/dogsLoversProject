@@ -1,7 +1,6 @@
 
-import React,{useEffect} from 'react';
-import { useDispatch, useSelector } from "react-redux";
-
+import React,{useState,useEffect} from 'react';
+import axios from 'axios'
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -26,10 +25,12 @@ import { Route, Switch } from "react-router-dom";
 import TableCountsPremiuim from './tableCountPremiuims'
 import TableCountReclamations from './TableReclamations'
 import TableUsers from './tableUsers'
+import Spinner from "../spinner/spinner"
 
 
 
-import Table from './tableUsers';
+
+import P404 from '../404/404';
 
 
 
@@ -116,6 +117,20 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+
+  const [data, setData] = useState("");
+  const [active] = useState("false");
+
+  async function getData(){
+      const result =await axios.get("http://localhost:4000/dogsLovers/users/profil",{withCredentials:true})
+    
+      setData(result.data);
+     }  
+  useEffect( () => {
+     
+      getData()
+
+},[]);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -123,13 +138,16 @@ function App() {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  
+  const user=JSON.parse(localStorage.getItem("userData"))
 
 
 
   return (
     <div className={classes.root}>
+      
       <CssBaseline />
+      { data.role=="admin" ?
+      <>
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
@@ -141,9 +159,11 @@ function App() {
           >
             <MenuIcon />
           </IconButton>
+          <Link to="/">
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            DogsLovers
           </Typography>
+          </Link>
           
         </Toolbar>
       </AppBar>
@@ -190,7 +210,8 @@ function App() {
           </Grid>
           
         </Container>
-      </main>
+      </main> </>:!data ?<Spinner/>:<P404/>
+}
     </div>
   );
 }

@@ -24,6 +24,8 @@ getData()
            return (
         <div className="wrap">
   <select defaultValue={data.region}  onChange={e => dispatch(getLoc(e.target.value))}>
+   <option defaultValue={data.region} value="">--choisissez votre gouvernorat--</option>)
+
     {regions.map(el=>
    <option defaultValue={data.region} value={el}>{el}</option>)
 }

@@ -5,7 +5,7 @@ export function AddUsers(name,lastname,email,password,role,tel,lat,lon,ecole,reg
     return ()=>
      axios.post("http://localhost:4000/dogsLovers/users",{name,lastname,email,password,role,tel,lat,lon,ecole,region,fb,youtube,video,desc,photo,lundi,lundipm,mardi,mardipm,mercredi,mercredipm,jeudi,jeudipm,vendredi,vendredipm,samedi,samedipm,dimanche,dimanchepm},{withCredentials:true}).then(rep=>{
         rep.data.role==="visiteur" ?
-        window.location.href="/":rep.data.role==="dresseur"?window.location.href="/registerDresseur":alert("no identfier")
+        window.location.href="/":rep.data.role==="dresseur"?window.location.href="/registerDresseur":console.log("no identfier")
        
         }).catch(err=>console.log(err)) 
 
@@ -44,9 +44,9 @@ export function Auth(email,password){
     return (dispatch)=>
     
      axios.post("http://localhost:4000/dogsLovers/login",{email,password},{withCredentials:true}).then(rep=>{
-       
-        rep.data.role!="error" ?
-        window.location.href="/":dispatch(errorAuth(rep.data)) 
+       if(rep.data!="email ou password sont incorrects"){
+                    window.location.href="/"}
+else dispatch(errorAuth(rep.data)) 
 
 
        

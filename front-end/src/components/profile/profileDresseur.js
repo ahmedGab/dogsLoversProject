@@ -114,7 +114,7 @@ const user = useSelector(state => state.user)
       { user ?
 
         <div>
-          {exist && user._id==exist._id ?
+          {exist && exist.role!="premiuim" && user._id==exist._id ?
           
           <div  className="profil" style={{backgroundImage:`url(http://localhost:4000/${user.coverimg})` ,height:"550px", backgroundPosition: "50% 20%",backgroundRepeat: "no-repeat",backgroundSize:"cover", width:"100%"}}>
                              
@@ -199,6 +199,7 @@ const user = useSelector(state => state.user)
 
 </Grid>
         <Grid className ="desc" item  sm={12} xs={12}  >
+          <h2 style={{borderBottom:"2px black solid",fontWeight:600,width:'175px'}}>Description</h2>
           <h5>{user.desc}</h5>
           </Grid>
         <Grid item  className="listDresseurs" style={{margin:"20px 30px"}} xs={12} sm={4} >

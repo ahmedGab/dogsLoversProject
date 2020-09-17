@@ -98,7 +98,7 @@ fontSize:'42px'
       textAlign:'center',
     
       [theme.breakpoints.down('sm')]: {
-        fontSize:"5vw"
+        fontSize:"3vw"
       }
 
   },
@@ -109,7 +109,8 @@ fontSize:'42px'
        padding:'0 15px 40px 15px'
   },
   [theme.breakpoints.up('sm')]: {
-      paddingTop:"100px"
+      paddingTop:"100px",
+      height:'400px'
 },
 
 },
@@ -369,7 +370,7 @@ className={classes.input}
           </form>
         </div>
       </Grid>
-      <Grid className={classes.map} item xs={12} sm={5} md={6} lg={7}  >
+      <Grid className={classes.map} item xs={12} sm={6} md={6} lg={7}  >
           <Map lat={36.74737824720171}  
   lon={ 10.218874049034865}/>
           </Grid>

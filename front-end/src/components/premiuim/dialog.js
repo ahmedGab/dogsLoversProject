@@ -10,7 +10,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {AddComptePremiuim} from "../../actions/premiuim"
 import Rating from '@material-ui/lab/Rating';
-import Alert from './alert'
 
 
 
@@ -27,6 +26,8 @@ export default function FormDialog(props) {
   const [name, setName] = useState("");
   const [lastname, setLastName] = useState("");
   const [role, setRole] = useState("");
+  const [msg, setMsg] = useState("");
+
   
   const dispatch = useDispatch()
   let user=""
@@ -59,7 +60,11 @@ export default function FormDialog(props) {
 function addPremiuim (){
   let date=new Date()
 dispatch(AddComptePremiuim(id,new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds())),name,lastname,email,tel,pass,role,"waiting"))
-setOpen(false)
+setMsg("votre demande a bien été envoyée")
+setTimeout(() => {
+  setOpen(false)
+
+}, 4000);
   
 }
   return (
@@ -76,7 +81,9 @@ setOpen(false)
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
   <DialogTitle id="form-dialog-title">{JSON.parse(localStorage.getItem("userData"))?<Rating name="size-large" value={5} size="large"  readOnly/>
 :<h4 style={{color:'red'  ,fontWeight:400}}>D'abord se connecter
-</h4>}</DialogTitle>
+</h4>}
+  <h4 style={{color:'green',fontWeight:400}}>{msg}</h4>
+</DialogTitle>
         <DialogContent>
           <DialogContentText>
           Pour vous abonner à compte premiuim, veuillez entrer votre email ,votre numéro et votre numéro téléphone ici.
@@ -125,8 +132,7 @@ setOpen(false)
 }
 
         </DialogActions>
-              {open==false? 
- <Alert el={true}  />:  <Alert el={false}  />}
+              
       </Dialog>
 
     </div>
